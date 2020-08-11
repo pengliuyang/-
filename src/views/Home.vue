@@ -71,7 +71,7 @@
     </div>
     <div class="title container news">
       <div class="common"><i class="icon new"></i><span>新闻公告</span></div>
-      <span class="allnews">全部内容 ></span>
+      <span class="allnews" @click="allcontain()">全部内容 ></span>
     </div>
     <div class="columnnews">
       <div class="column container">
@@ -127,7 +127,7 @@
             >
           </div>
           <el-menu
-            :default-active="activeIndex"
+         
             class="el-menu-demo"
             mode="horizontal"
             @select="handleSelect"
@@ -193,6 +193,9 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
+    allcontain(){
+      this.$router.push('/news/notice')
+    }
   },
   // mounted(){
   //   axios.get('https://192.168.31.179:8081/carouse/carouse').then((res)=>{

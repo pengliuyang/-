@@ -119,7 +119,7 @@ export default {
         align-items: center;
         cursor: pointer;
         span {
-          margin-right: 20px;
+          margin-right: 10px;
           height: 22px;
           font-size: 20px;
           transition: all ease 1s;
