@@ -5,13 +5,25 @@
       <p>跨国投资汇率风险管理虚拟仿真实训项目</p>
       <div class="container" id="lunbo">
         <div class="block">
-          <el-carousel trigger="click">
-            <el-carousel-item v-for="item in a" :key="item">
+          <!-- <el-carousel trigger="click">
+            <el-carousel-item v-for="item in arr" :key="item.id">
+              <img :src="item.url" alt="" />
+              <div class="box">
+                <h3>{{ item.title }}</h3>
+                <p>
+                  {{ item.description }}
+                </p>
+              </div>
+            </el-carousel-item>
+          </el-carousel> -->
+              <el-carousel trigger="click">
+            <el-carousel-item v-for="item in arr" :key="item.id">
               <img :src="item" alt="" />
               <div class="box">
-                <h3>虚拟仿真项目</h3>
+                <h3>2</h3>
                 <p>
-                  哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊哈哈哈哈哈
+                  11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+              
                 </p>
               </div>
             </el-carousel-item>
@@ -20,10 +32,8 @@
         <div class="right">
           <p>虚拟仿真实验</p>
           <span>项目入口</span>
-           <a href="" class="text">我要做实验</a>
-           <a href="" class="expert">专家通道</a>
-          <!-- <button @click="fun()">我要做实验</button>
-          <button @click="fun()">专家通道</button> -->
+          <a href="" class="text">我要做实验</a>
+          <a href="" class="expert">专家通道</a>
         </div>
       </div>
     </div>
@@ -70,22 +80,49 @@
       </div>
     </div>
     <div class="title container news">
-      <div class="common"><i class="icon new"></i><span>新闻公告</span></div>
+      <div class="common">
+        <!-- <i class="icon new"></i><span>{{ title }}</span> -->
+        <i class="icon new"></i><span>新闻公告</span>
+      </div>
       <span class="allnews" @click="allcontain()">全部内容 ></span>
     </div>
     <div class="columnnews">
       <div class="column container">
-        <div class="columnitems"><span>新闻</span><span>新闻</span></div>
-        <div class="columphoto">
+        <div class="columnitems">
+          <!-- <span
+            v-for="item in columnlink"
+            :key="item.id"
+            @click="linkdetail(item.id, $event)"
+            ref="items"
+            >{{ item.name }}</span
+          > -->
+            <span class="active" @click="changecolor()">新闻</span>
+            <span @click="changecolor()">公告</span>
+        </div>
+        <!-- <div class="columphoto">
+          <img :src="imglarge.bgImgUrl" alt="" />
+          <div class="columphotodetail">
+            <h3>{{ imglarge.title }}</h3>
+            <p>
+              {{ imglarge.description }}
+            </p>
+          </div>
+        </div> -->
+          <div class="columphoto">
           <img src="../assets/images/5.jpg" alt="" />
           <div class="columphotodetail">
-            <h3>6666666666</h3>
+            <h3>1111</h3>
             <p>
-              666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+              222222222222
             </p>
           </div>
         </div>
         <div class="columphotoes">
+          <!-- <div v-for="item in imgsmall" :key="item.bgImgUrl">
+            <img :src="item.bgImgUrl" alt="" />
+            <p>{{ item.title }}</p>
+            <p class="time">{{ item.createTime }}</p>
+          </div> -->
           <div>
             <img src="../assets/images/5.jpg" alt="" />
             <p>1</p>
@@ -98,10 +135,10 @@
           </div>
           <div>
             <img src="../assets/images/5.jpg" alt="" />
-            <p>1</p>
+            <p>11</p>
             <p class="time">2020-07-30</p>
           </div>
-          <div>
+           <div>
             <img src="../assets/images/5.jpg" alt="" />
             <p>1</p>
             <p class="time">2020-07-30</p>
@@ -127,26 +164,41 @@
             >
           </div>
           <el-menu
-         
             class="el-menu-demo"
             mode="horizontal"
             @select="handleSelect"
             background-color="#f3f3f3"
             text-color="#2d2d2d"
           >
-            <el-menu-item index="1">处理中心</el-menu-item>
-            <el-submenu index="2">
-              <template slot="title">我的工作台</template>
-              <el-menu-item index="2-1">选项1</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item>
-              <el-submenu index="2-4">
+            <!-- <el-menu-item index="1">处理中心</el-menu-item> -->
+            <el-submenu
+              :index="item.classifyName"
+              v-for="item in treelistfilter"
+              :key="item"
+            >
+              <template slot="title">{{ item.classifyName }}</template>
+              <el-menu-item
+                :index="children.linkUrl"
+                v-for="children in item.friendshipLink"
+                :key="children.title"
+                >{{ children.title }}</el-menu-item
+              >
+              <!-- <el-menu-item index="2-2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item> -->
+              <!-- <el-submenu index="2-4">
                 <template slot="title">选项4</template>
                 <el-menu-item index="2-4-1">选项1</el-menu-item>
                 <el-menu-item index="2-4-2">选项2</el-menu-item>
                 <el-menu-item index="2-4-3">选项3</el-menu-item>
-              </el-submenu>
+              </el-submenu> -->
             </el-submenu>
+            <el-menu-item
+              :index="item.classifyName"
+              v-for="item in small"
+              :key="item.classifyName"
+              ><a href="https://www.baidu.com" target="_blank">{{
+                item.classifyName
+              }}</a></el-menu-item>
             <el-submenu index="3">
               <template slot="title">我的工作台</template>
               <el-menu-item index="3-1">选项1</el-menu-item>
@@ -161,8 +213,7 @@
             <el-menu-item index="4"
               ><a href="https://www.baidu.com" target="_blank"
                 >订单管理</a
-              ></el-menu-item
-            >
+              ></el-menu-item>
           </el-menu>
         </div>
       </div>
@@ -171,21 +222,34 @@
 </template>
 
 <script>
+// import { carousel } from "@/apis/home.js";
+import { titlelink } from "@/apis/home.js";
+import { getallPage } from "@/apis/home.js";
+import { columnlink } from "@/apis/home.js";
+import { columnlinkcontent } from "@/apis/home.js";
+import { linkclassify } from "@/apis/home.js";
 
-// import axios from 'axios';
 export default {
   name: "Home",
   data() {
     return {
-      a: [
+      arr: [
         require("../assets/images/7.jpg"),
         require("../assets/images/2.jpg"),
         require("../assets/images/5.jpg"),
       ],
       activeIndex: "1",
+      carouselIds: [],
+      title: "",
+      columnlink: [],
+      imglarge: {},
+      imgsmall: [],
+      // 动态菜单创建
+      treelist: [],
+      small: [],
     };
   },
- 
+
   methods: {
     fun() {
       alert(0);
@@ -193,20 +257,63 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    allcontain(){
-      this.$router.push('/news/notice')
-    }
+    allcontain() {
+      this.$router.push("/news/notice");
+    },
+    linkdetail(id, event) {
+      columnlinkcontent(id).then((res) => {
+        this.imglarge = res[0];
+        this.imgsmall = res.splice(1, 4);
+        for (var i = 0; i < this.$refs.items.length; i++) {
+          this.$refs.items[i].className = "";
+        }
+        event.target.className = "active";
+      });
+      console.log(this.treelistfilter);
+    },
   },
-  // mounted(){
-  //   axios.get('https://192.168.31.179:8081/carouse/carouse').then((res)=>{
-  //     console.log(res.data.data)
-  //   })
-  // }
+  computed: {
+    treelistfilter() {
+      return this.treelist.filter((value) => {
+        if (value.friendshipLink.length == 0) {
+          this.small.push(value) ;
+          console.log(this.small);
+        }
+        return value.friendshipLink.length;
+      });
+    },
+  },
+  mounted() {
+    getallPage().then((res) => {
+      //  console.log(res)
+      // carousel(res[0].carouselIds).then((res) => {
+      //   this.arr = res;
+      // });
+      titlelink(res[0].headline2Id).then((res) => {
+        this.title = res[0].title;
+      });
+      columnlink(res[0].columnIds).then((res) => {
+        res.map((res) => {
+          if (res.level == 2) {
+            this.columnlink.push({ name: res.columnName, id: res.id });
+          }
+        });
+        columnlinkcontent(this.columnlink[0].id).then((res) => {
+          this.imglarge = res[0];
+          this.imgsmall = res.splice(1, 4);
+        });
+      });
+      linkclassify(res[0].friendshipLinkIds).then((res) => {
+        this.treelist = res;
+        console.log(this.treelist);
+      });
+    });
+  },
 };
 </script>
-<style lang="less" >
+<style lang="less">
 .home {
-   font-family: 'Source Han Serif CN';
+  font-family: "Source Han Serif CN";
   .banner {
     width: 100%;
     height: 300px;
@@ -258,7 +365,7 @@ export default {
           color: #000;
         }
       }
-       box-shadow: -1px 1px 1px 1px #ccc;
+      box-shadow: -1px 1px 1px 1px #ccc;
     }
     .right {
       width: 200px;
@@ -273,7 +380,7 @@ export default {
         font-size: 16px;
         color: #ffffff;
       }
-      a{
+      a {
         text-decoration: none;
         display: block;
         width: 160px;
@@ -284,19 +391,17 @@ export default {
         margin-top: 50px;
         border-radius: 5px;
         color: #fff;
-        font-size:18px ;
+        font-size: 18px;
       }
-      .text{
-          background-color: #fff;
-           color: #bb2b18;
+      .text {
+        background-color: #fff;
+        color: #bb2b18;
       }
-      .expert{
-          background-color: #2d2d2d;
-           color: #fff;
+      .expert {
+        background-color: #2d2d2d;
+        color: #fff;
       }
     }
-  
-   
   }
   .el-carousel__container {
     height: 372px;
@@ -399,7 +504,6 @@ export default {
       color: #d6d6d6;
       margin-top: 14px;
       cursor: pointer;
-
     }
   }
   .columnnews {
@@ -416,10 +520,14 @@ export default {
         margin-bottom: 40px;
         border-bottom: 6px solid transparent;
         font-size: 18px;
-      }
-      :hover {
-        border-bottom: 6px solid #bb2b18;
         cursor: pointer;
+      }
+      span:hover {
+        border-bottom: 6px solid #bb2b18;
+
+      }
+      .active {
+        border-bottom: 6px solid #bb2b18;
       }
     }
     .columphoto {
@@ -455,6 +563,7 @@ export default {
         transition: 1s;
         img {
           width: 100%;
+          height: 168px;
         }
         p {
           margin-top: 10px;
@@ -486,13 +595,13 @@ export default {
       display: flex;
       .visit {
         margin-right: 108px;
-          
       }
-       .el-menu-item{
-         font-size: 18px;
-       }
+      .el-menu-item {
+        font-size: 18px;
+      }
     }
-    .visit,.friendlink {
+    .visit,
+    .friendlink {
       .visittotal {
         padding-bottom: 10px;
         width: 200px;
@@ -515,11 +624,17 @@ export default {
       a {
         text-decoration: none;
       }
-      .el-submenu__title{
+      .el-submenu__title {
         font-size: 18px;
       }
-      .el-menu-item *{
+      .el-menu-item * {
         vertical-align: baseline;
+      }
+      .el-submenu__title,.is-active,.el-submenu{
+        border: none;
+      }
+      .el-menu--horizontal>.el-submenu.is-active .el-submenu__title{
+          border: none;
       }
     }
   }

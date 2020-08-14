@@ -12,6 +12,7 @@
         <li :class="{active:this.$route.path.indexOf('news')>0?true:false}"><router-link to='/news'>新闻公告</router-link></li>
         <li :class="{active:this.$route.path.indexOf('enterprise')>0?true:false}"><router-link to='/enterprise'>校企合作</router-link></li>
         <li :class="{active:this.$route.path.indexOf('contact')>0?true:false}"><router-link to='/contact'>联系我们</router-link></li>
+
       </ul>
       <div class="circle" @click="fun()">
         <div></div>
