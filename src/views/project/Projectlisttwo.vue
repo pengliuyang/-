@@ -1,16 +1,12 @@
 <template>
-<div class="centeritemdetail">
+      <div class="centeritemdetail">
         <div class="title">
-          <span>中心特色</span>
-          <a href="">&lt;&emsp;返回</a>
+          <span>项目列表>项目2</span>
+          <a @click="route()">&lt;&emsp;返回</a>
         </div>
         <div class="titlebottom">
           <h3>标题</h3>
-          <div>
-            哈哈哈哈哈哈哈红红火哈哈哈哈哈哈哈红红火火恍恍惚哈哈哈惚红红火火恍恍惚惚
-            红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚哈哈哈哈
-            哈哈哈哈哈哈哈红红火火恍恍惚哈哈哈惚红红火火恍恍惚惚红红火火恍恍惚惚红红
-          </div>
+          <div>内容呀内容呀内容呀内容呀内容呀</div>
           <p>2020-07-20</p>
         </div>
       </div>
@@ -18,7 +14,11 @@
 
 <script>
 export default {
-
+ methods:{
+   route(){
+     this.$router.push('/project/projectlist')
+   }
+ }
 }
 </script>
 
@@ -37,6 +37,9 @@ export default {
         font-size: 18px;
         a{
         color: #2d2d2d;
+        }
+        a:hover{
+          cursor: pointer;
         }
       }
       .titlebottom {

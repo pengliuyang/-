@@ -1,8 +1,8 @@
 <template>
       <div class="resourceshare">
         <div class="title">
-          <span>师资介绍</span>
-          <a href="">&lt;&emsp;返回</a>
+          <span>资源共享</span>
+          <!-- <a href="">&lt;&emsp;返回</a> -->
         </div>
         <div class="titlebottom">
                <div class="teachershow">

@@ -2,15 +2,13 @@
       <div class="enterprisecooperation">
         <div class="title">
           <span>合作单位</span>
-          <a href="">&lt;&emsp;返回</a>
+          <!-- <a>&lt;&emsp;返回</a> -->
         </div>
         <div class="titlebottom">
                <div class="teachershow">
                     <img src="../../assets/images/7.jpg" alt="">
                     <div>
-                       <P class="name">姓名</P>
-                       <P class="level">职称:xx</P>
-                       <P class="education">学历:xx</P>
+                       <P class="name">姓名</P><P class="level">职称:xx</P><P class="education">学历:xx</P>
                     </div>
                </div>
                 <div class="teachershow">

@@ -4,7 +4,7 @@
       <img src="../assets/images/组47.jpg" alt="" />
     </div>
     <div class="centeritems container clearfix">
-      <ul>
+      <ul v-show="this.$route.path.indexOf('noticedetail')>-1?false:true">
         <li>新闻公告</li>
         <li @click="link('/news/notice')" :class="{active:this.$route.path.indexOf('notice')>0?true:false}">公告</li>
       </ul>
@@ -20,6 +20,9 @@ export default {
   link(a){
       this.$router.push(a)
   }
+  },
+  mounted(){
+    console.log(this.$route.path,this.$route.path.indexOf('noticedetail'))
   }
 };
 </script>

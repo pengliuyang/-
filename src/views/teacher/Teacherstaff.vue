@@ -2,7 +2,7 @@
       <div class="teacherstaff">
         <div class="title">
           <span>师资介绍</span>
-          <a href="">&lt;&emsp;返回</a>
+          <!-- <a href="">&lt;&emsp;返回</a> -->
         </div>
         <div class="titlebottom">
                <div class="teachershow">

@@ -2,10 +2,10 @@
   <div class="newsnotice">
     <div class="title">
       <span>公告</span>
-      <a href="">&lt;&emsp;返回</a>
+      <!-- <a href="">&lt;&emsp;返回</a> -->
     </div>
     <div class="titlebottom">
-      <div class="noticeitems">
+      <div class="noticeitems" @click="detail()">
         <img src="../../assets/images/5.jpg" alt="" />
         <div class="detail">
           <h3>模块标题</h3>
@@ -15,7 +15,7 @@
           <span>2020-07-20</span>
         </div>
       </div>
-          <div class="noticeitems">
+          <div class="noticeitems"  @click="detail()" >
         <img src="../../assets/images/5.jpg" alt="" />
         <div class="detail">
           <h3>模块标题</h3>
@@ -25,7 +25,7 @@
           <span>2020-07-20</span>
         </div>
       </div>
-          <div class="noticeitems">
+          <div class="noticeitems"  @click="detail()">
         <img src="../../assets/images/5.jpg" alt="" />
         <div class="detail">
           <h3>模块标题</h3>
@@ -41,7 +41,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{}
+  },
+  methods:{
+    detail(){
+    this.$router.push('/news/noticedetail')
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -100,6 +109,7 @@ export default {};
     }
     .noticeitems:hover {
       transform: scale(1.05);
+      cursor: pointer;
     }
   }
 }

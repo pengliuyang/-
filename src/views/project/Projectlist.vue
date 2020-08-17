@@ -1,8 +1,8 @@
 <template>
       <div class="centeritemdetail">
         <div class="title">
-          <span>中心简介</span>
-          <a href="">&lt;&emsp;返回</a>
+          <span>项目列表</span>
+          <!-- <a href="">&lt;&emsp;返回</a> -->
         </div>
         <div class="titlebottom">
           <h3>标题</h3>

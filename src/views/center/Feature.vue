@@ -3,7 +3,7 @@
         <div class="title">
           <span>中心特色</span>
           <!-- <span class="link">&lt;&emsp;返回</span> -->
-          <a href="">&lt;&emsp;返回</a>
+          <!-- <a href="">&lt;&emsp;返回</a> -->
         </div>
         <div class="titlebottom">
        <div class="input_video">

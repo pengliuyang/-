@@ -16,14 +16,13 @@
               </div>
             </el-carousel-item>
           </el-carousel> -->
-              <el-carousel trigger="click">
-            <el-carousel-item v-for="item in arr" :key="item.id">
-              <img :src="item" alt="" />
+          <el-carousel trigger="click">
+            <el-carousel-item v-for="item in arr" :key="item">
+              <img :src="item.url" alt="" />
               <div class="box">
-                <h3>2</h3>
+                <h3>{{item.title}}</h3>
                 <p>
-                  11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-              
+                {{item.contain}}
                 </p>
               </div>
             </el-carousel-item>
@@ -96,8 +95,8 @@
             ref="items"
             >{{ item.name }}</span
           > -->
-            <span class="active" @click="changecolor()">新闻</span>
-            <span @click="changecolor()">公告</span>
+          <span :class="{active:color=='news'}" @click="changecolor('news')">新闻</span>
+          <span :class="{active:color=='notice'}" @click="changecolor('notice')">公告</span>
         </div>
         <!-- <div class="columphoto">
           <img :src="imglarge.bgImgUrl" alt="" />
@@ -108,13 +107,23 @@
             </p>
           </div>
         </div> -->
-          <div class="columphoto">
+        <!-- <div class="columphoto">
           <img src="../assets/images/5.jpg" alt="" />
           <div class="columphotodetail">
             <h3>1111</h3>
             <p>
               222222222222
             </p>
+          </div>
+        </div> -->
+        <div class="columphoto" v-for="item in news" :key="item">
+          <img :src="item.url" alt="" />
+          <div class="columphotodetail">
+            <h3>{{ item.title }}</h3>
+            <p>
+              {{ item.contain }}
+            </p>
+            <span>{{ item.time }}</span>
           </div>
         </div>
         <div class="columphotoes">
@@ -123,12 +132,12 @@
             <p>{{ item.title }}</p>
             <p class="time">{{ item.createTime }}</p>
           </div> -->
-          <div>
-            <img src="../assets/images/5.jpg" alt="" />
-            <p>1</p>
-            <p class="time">2020-07-30</p>
+          <div v-for="item in newsitem" :key="item">
+            <img :src="item.url" alt="" />
+            <p>{{ item.title }}</p>
+            <p class="time">{{ item.time }}</p>
           </div>
-          <div>
+          <!-- <div>
             <img src="../assets/images/5.jpg" alt="" />
             <p>1</p>
             <p class="time">2020-07-30</p>
@@ -142,7 +151,7 @@
             <img src="../assets/images/5.jpg" alt="" />
             <p>1</p>
             <p class="time">2020-07-30</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -170,8 +179,12 @@
             background-color="#f3f3f3"
             text-color="#2d2d2d"
           >
-            <!-- <el-menu-item index="1">处理中心</el-menu-item> -->
-            <el-submenu
+            <el-menu-item index="1"
+              ><a href="https://www.baidu.com" target="_blank"
+                >订单管理</a
+              ></el-menu-item
+            >
+            <!-- <el-submenu
               :index="item.classifyName"
               v-for="item in treelistfilter"
               :key="item"
@@ -183,22 +196,22 @@
                 :key="children.title"
                 >{{ children.title }}</el-menu-item
               >
-              <!-- <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item> -->
-              <!-- <el-submenu index="2-4">
+              <el-menu-item index="2-2">选项2</el-menu-item>
+              <el-menu-item index="2-3">选项3</el-menu-item>
+              <el-submenu index="2-4">
                 <template slot="title">选项4</template>
                 <el-menu-item index="2-4-1">选项1</el-menu-item>
                 <el-menu-item index="2-4-2">选项2</el-menu-item>
                 <el-menu-item index="2-4-3">选项3</el-menu-item>
-              </el-submenu> -->
-            </el-submenu>
-            <el-menu-item
+              </el-submenu>
+            </el-submenu> -->
+            <!-- <el-menu-item
               :index="item.classifyName"
               v-for="item in small"
               :key="item.classifyName"
               ><a href="https://www.baidu.com" target="_blank">{{
                 item.classifyName
-              }}</a></el-menu-item>
+              }}</a></el-menu-item> -->
             <el-submenu index="3">
               <template slot="title">我的工作台</template>
               <el-menu-item index="3-1">选项1</el-menu-item>
@@ -213,7 +226,8 @@
             <el-menu-item index="4"
               ><a href="https://www.baidu.com" target="_blank"
                 >订单管理</a
-              ></el-menu-item>
+              ></el-menu-item
+            >
           </el-menu>
         </div>
       </div>
@@ -223,20 +237,21 @@
 
 <script>
 // import { carousel } from "@/apis/home.js";
-import { titlelink } from "@/apis/home.js";
-import { getallPage } from "@/apis/home.js";
-import { columnlink } from "@/apis/home.js";
-import { columnlinkcontent } from "@/apis/home.js";
-import { linkclassify } from "@/apis/home.js";
+// import { titlelink } from "@/apis/home.js";
+// import { getallPage } from "@/apis/home.js";
+// import { columnlink } from "@/apis/home.js";
+// import { columnlinkcontent } from "@/apis/home.js";
+// import { linkclassify } from "@/apis/home.js";
 
 export default {
   name: "Home",
   data() {
     return {
       arr: [
-        require("../assets/images/7.jpg"),
-        require("../assets/images/2.jpg"),
-        require("../assets/images/5.jpg"),
+        {url:require("../assets/images/7.jpg"),title:"虚拟仿真项目1",contain:"内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"},
+        {url: require("../assets/images/5.jpg"),title:"虚拟仿真项目2",contain:"内容内容内容内容内容内容内容内容内容"},
+        {url: require("../assets/images/2.jpg"),title:"虚拟仿真项目3",contain:"内容内容内容内容内容内容内容内容内容"},
+       
       ],
       activeIndex: "1",
       carouselIds: [],
@@ -247,6 +262,37 @@ export default {
       // 动态菜单创建
       treelist: [],
       small: [],
+      news: [
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          contain: "这是新闻",
+          time: "2020-07-20",
+        },
+      ],
+      newsitem: [
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+      ],
+      color:"news",
     };
   },
 
@@ -260,54 +306,118 @@ export default {
     allcontain() {
       this.$router.push("/news/notice");
     },
-    linkdetail(id, event) {
-      columnlinkcontent(id).then((res) => {
-        this.imglarge = res[0];
-        this.imgsmall = res.splice(1, 4);
-        for (var i = 0; i < this.$refs.items.length; i++) {
-          this.$refs.items[i].className = "";
-        }
-        event.target.className = "active";
-      });
-      console.log(this.treelistfilter);
+    // linkdetail(id, event) {
+    //   columnlinkcontent(id).then((res) => {
+    //     this.imglarge = res[0];
+    //     this.imgsmall = res.splice(1, 4);
+    //     for (var i = 0; i < this.$refs.items.length; i++) {
+    //       this.$refs.items[i].className = "";
+    //     }
+    //     event.target.className = "active";
+    //   });
+    //   console.log(this.treelistfilter);
+    // },
+    changecolor(column) {
+      if (column == "news") {
+        this.news = [
+          {
+            url: require("../assets/images/5.jpg"),
+            title: "四川大学新闻",
+            contain: "这是新闻",
+            time: "2020-07-20",
+          },
+        ];
+        this.newsitem=[
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/5.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+      ];
+      this.color="news"
+      }
+         if (column == "notice") {
+        this.news = [
+          {
+            url: require("../assets/images/2.jpg"),
+            title: "四川大学公告",
+            contain: "这是公告",
+            time: "2020-07-20",
+          },
+        ];
+        this.newsitem=[
+        {
+          url: require("../assets/images/2.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/2.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/2.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+        {
+          url: require("../assets/images/2.jpg"),
+          title: "四川大学",
+          time: "2020-07-30",
+        },
+      ],
+       this.color="notice"
+      }
     },
   },
   computed: {
-    treelistfilter() {
-      return this.treelist.filter((value) => {
-        if (value.friendshipLink.length == 0) {
-          this.small.push(value) ;
-          console.log(this.small);
-        }
-        return value.friendshipLink.length;
-      });
-    },
+    // treelistfilter() {
+    //   return this.treelist.filter((value) => {
+    //     if (value.friendshipLink.length == 0) {
+    //       this.small.push(value) ;
+    //       console.log(this.small);
+    //     }
+    //     return value.friendshipLink.length;
+    //   });
+    // },
   },
   mounted() {
-    getallPage().then((res) => {
-      //  console.log(res)
-      // carousel(res[0].carouselIds).then((res) => {
-      //   this.arr = res;
-      // });
-      titlelink(res[0].headline2Id).then((res) => {
-        this.title = res[0].title;
-      });
-      columnlink(res[0].columnIds).then((res) => {
-        res.map((res) => {
-          if (res.level == 2) {
-            this.columnlink.push({ name: res.columnName, id: res.id });
-          }
-        });
-        columnlinkcontent(this.columnlink[0].id).then((res) => {
-          this.imglarge = res[0];
-          this.imgsmall = res.splice(1, 4);
-        });
-      });
-      linkclassify(res[0].friendshipLinkIds).then((res) => {
-        this.treelist = res;
-        console.log(this.treelist);
-      });
-    });
+    // getallPage().then((res) => {
+    //   titlelink(res[0].headline2Id).then((res) => {
+    //     this.title = res[0].title;
+    //   });
+    //   columnlink(res[0].columnIds).then((res) => {
+    //     res.map((res) => {
+    //       if (res.level == 2) {
+    //         this.columnlink.push({ name: res.columnName, id: res.id });
+    //       }
+    //     });
+    //     columnlinkcontent(this.columnlink[0].id).then((res) => {
+    //       this.imglarge = res[0];
+    //       this.imgsmall = res.splice(1, 4);
+    //     });
+    //   });
+    //   linkclassify(res[0].friendshipLinkIds).then((res) => {
+    //     this.treelist = res;
+    //     console.log(this.treelist);
+    //   });
+    // });
   },
 };
 </script>
@@ -358,11 +468,12 @@ export default {
           white-space: normal !important;
           text-overflow: ellipsis;
           word-wrap: break-word;
-          -webkit-line-clamp: 10;
+          -webkit-line-clamp:2;
           -webkit-box-orient: vertical;
           font-size: 20px;
           margin-top: 16px;
           color: #000;
+          font-size: 18px;
         }
       }
       box-shadow: -1px 1px 1px 1px #ccc;
@@ -524,7 +635,6 @@ export default {
       }
       span:hover {
         border-bottom: 6px solid #bb2b18;
-
       }
       .active {
         border-bottom: 6px solid #bb2b18;
@@ -541,6 +651,7 @@ export default {
         width: 560px;
         height: 310px;
         background: rgb(143, 139, 139);
+        position: relative;
         p {
           display: -webkit-box;
           overflow: hidden;
@@ -550,6 +661,12 @@ export default {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           margin-top: 20px;
+        }
+        span {
+          color: #ccc;
+          position: absolute;
+          right: 30px;
+          bottom: 20px;
         }
       }
     }
@@ -630,11 +747,13 @@ export default {
       .el-menu-item * {
         vertical-align: baseline;
       }
-      .el-submenu__title,.is-active,.el-submenu{
+      .el-submenu__title,
+      .is-active,
+      .el-submenu {
         border: none;
       }
-      .el-menu--horizontal>.el-submenu.is-active .el-submenu__title{
-          border: none;
+      .el-menu--horizontal > .el-submenu.is-active .el-submenu__title {
+        border: none;
       }
     }
   }

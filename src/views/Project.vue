@@ -23,7 +23,10 @@
           </a>
           <ul class="c_item" v-if="list.flag">
             <li v-for="sub in list.sublist" :key="sub">
-              <a>{{ sub.name }}</a>
+              <a   :class="{
+              active: $route.path.indexOf(sub.route) > 0 ? true : false,
+            }"
+            v-on:click="subshow(sub.route)">{{ sub.name }}</a>
             </li>
           </ul>
         </li>
@@ -43,7 +46,7 @@ export default {
           //用于状态判定
           flag: false,
           //二级菜单
-          sublist: [{ name: "项目1" }, { name: "项目2" }],
+          sublist: [{ name: "项目1" ,route: "projectlistone"}, { name: "项目2",route: "projectlisttwo"}],
           route: "projectlist",
         },
         {
@@ -83,6 +86,9 @@ export default {
       }
       this.$router.push(list.route);
     },
+    subshow(route){
+      this.$router.push(route);
+    }
   },
 };
 </script>
@@ -143,10 +149,6 @@ export default {
           -ms-transform: rotate(180deg);
         }
       }
-      .active {
-        background: #bb2a17;
-        color: #fff;
-      }
       .c_item {
         margin-top: 20px;
         li {
@@ -162,7 +164,15 @@ export default {
             font-size: 16px;
             line-height: 30px;
           }
+           .active {
+        background: #bb2a17;
+        color: #fff;
+      }
         }
+      }
+        .active {
+        background: #bb2a17;
+        color: #fff;
       }
       .c_item li a:hover {
         background: #bb2a17;

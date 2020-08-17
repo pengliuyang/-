@@ -1,16 +1,12 @@
 <template>
-<div class="centeritemdetail">
+    <div class="centeritemdetail">
         <div class="title">
-          <span>中心特色</span>
-          <a href="">&lt;&emsp;返回</a>
+          <span>新闻公告>公告</span>
+          <a @click="route()">&lt;&emsp;返回</a>
         </div>
         <div class="titlebottom">
           <h3>标题</h3>
-          <div>
-            哈哈哈哈哈哈哈红红火哈哈哈哈哈哈哈红红火火恍恍惚哈哈哈惚红红火火恍恍惚惚
-            红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚哈哈哈哈
-            哈哈哈哈哈哈哈红红火火恍恍惚哈哈哈惚红红火火恍恍惚惚红红火火恍恍惚惚红红
-          </div>
+          <div>哈哈哈哈哈哈哈红红火哈哈哈哈哈哈哈红红火火恍恍惚哈哈哈惚红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚红红火火恍恍惚惚哈哈哈哈</div>
           <p>2020-07-20</p>
         </div>
       </div>
@@ -18,8 +14,15 @@
 
 <script>
 export default {
-
-}
+  data(){
+    return{}
+  },
+  methods:{
+    route(){
+     this.$router.push('/news/notice')
+   }
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -37,6 +40,9 @@ export default {
         font-size: 18px;
         a{
         color: #2d2d2d;
+        }
+        a:hover{
+          cursor: pointer;
         }
       }
       .titlebottom {

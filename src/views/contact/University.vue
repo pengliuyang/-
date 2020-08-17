@@ -2,7 +2,7 @@
       <div class="contactdetail">
         <div class="title">
           <span>学校信息</span>
-          <a href="">&lt;&emsp;返回</a>
+          <!-- <a href="">&lt;&emsp;返回</a> -->
         </div>
         <div class="titlebottom">
           <h3>学校信息</h3>
