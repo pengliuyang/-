@@ -37,3 +37,10 @@ export function linkclassify(parms){
         return res.data.data
     });
 }
+export function _queryStock( params ){
+    return axios.get('/column/column/7', {
+        params
+    }).then(res=>{
+        return res.data.data
+    });
+}

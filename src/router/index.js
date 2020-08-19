@@ -35,10 +35,15 @@ const routes = [
         meta: { ispass: true },
       },
       {
-        // 账号添加
         path: "feature",
         name: "feature",
         component: () => import("../views/center/Feature.vue"),
+        meta: { ispass: true },
+      },
+      {
+        path: "guarantee",
+        name: "guarantee",
+        component: () => import("../views/center/Guarantee.vue"),
         meta: { ispass: true },
       },
     ],
@@ -98,6 +103,18 @@ const routes = [
         component: () => import("../views/resource/Resourceshare.vue"),
         meta: { ispass: true },
       },
+      {
+        path: "databaseresource",
+        name: "databaseresource",
+        component: () => import("../views/resource/Databaseresource.vue"),
+        meta: { ispass: true },
+      },
+      {
+        path: "excellentmooc",
+        name: "excellentmooc",
+        component: () => import("../views/resource/Excellentmooc.vue"),
+        meta: { ispass: true },
+      },
     ],
   },
   {
@@ -125,8 +142,8 @@ const routes = [
         meta: { ispass: true },
       },
       {
-        path: "projectcenter",
-        name: "projectcenter",
+        path: "centralfeatures",
+        name: "centralfeatures",
         component: () => import("../views/project/Projectcenter.vue"),
         meta: { ispass: true },
       },
@@ -148,6 +165,20 @@ const routes = [
         path: "noticedetail",
         name: "noticedetail",
         component: () => import("../views/news/Noticedetail.vue"),
+        meta: { ispass: true },
+      },
+    ],
+  },
+  {
+    path: "/mystyle",
+    name: "mystyle",
+    component: () => import("../views/Mystyle.vue"),
+    redirect: { name: "awards" },
+    children: [
+      {
+        path: "awards",
+        name: "awards",
+        component: () => import("../views/mystyle/Awards.vue"),
         meta: { ispass: true },
       },
     ],

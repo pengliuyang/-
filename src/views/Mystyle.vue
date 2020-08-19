@@ -1,40 +1,32 @@
 <template>
   <div class="teacher">
     <div class="banner">
-      <img src="../assets/images/组47.jpg" alt="" />
+      <img src="../assets/images/6.png" alt="" />
     </div>
     <div class="centeritems container clearfix">
       <ul>
-        <li>师资队伍</li>
-        <li
-          @click="link('/teacher/teacherstaff')"
-          :class="{
-            active: this.$route.path.indexOf('teacherstaff') > 0 ? true : false,
-          }"
-        >
-          师资介绍
-        </li>
+        <li>系我风采</li>
+        <li @click="link('/mystyle/awards')" :class="{active:this.$route.path.indexOf('awards')>0?true:false}">获奖情况</li>
       </ul>
-      <router-view ></router-view>
-    </div>
+      <router-view></router-view>
 
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-
-  methods: {
-    link(a) {
-      this.$router.push(a);
-    },
-  },
+  methods:{
+  link(a){
+      this.$router.push(a)
+  }
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .teacher {
-  font-family: "Source Han Serif CN";
+   font-family: 'Source Han Serif CN';
   .banner {
     height: 200px;
     img {
@@ -66,17 +58,11 @@ export default {
     margin: 0 auto;
     margin-bottom: 20px;
   }
-  .active {
-    background: #bb2a17;
-    color: #fff;
-  }
- 
-  .clearfix::after {
-    clear: both;
-    display: block;
-    content: "";
-    height: 0;
-  }
+ .active{
+  background: #bb2a17;
+  color:#fff ;
+}
+margin-bottom: 90px;
 }
 .centeritems > ul > li:not(:nth-child(1)) {
   line-height: 30px;
@@ -87,4 +73,5 @@ export default {
   color: #fff;
   cursor: pointer;
 }
+
 </style>

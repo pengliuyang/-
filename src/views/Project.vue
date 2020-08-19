@@ -58,7 +58,7 @@ export default {
             { name: "娃娃鞋" },
             { name: "靴子" },
           ],
-          route: "projectcenter",
+          route: "centralfeatures",
         },
         {
           name: "现任领导",

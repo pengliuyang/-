@@ -7,11 +7,11 @@
       <ul>
         <li>资源共享</li>
         <li @click="link('/resource/resourceshare')" :class="{active:this.$route.path.indexOf('resourceshare')>0?true:false}">虚拟仿真项目</li>
-        <li @click="link('/resource/resourceshare')">数据库资源</li>
-        <li @click="link('/resource/resourceshare')" >精品慕课MOOC</li>
-        <li @click="link('/resource/resourceshare')" >量化投资</li>
+        <li @click="link('/resource/databaseresource')" :class="{active:this.$route.path.indexOf('databaseresource')>0?true:false}">数据资源</li>
+        <li @click="link('/resource/excellentmooc')" :class="{active:this.$route.path.indexOf('excellentmooc')>0?true:false}">精品慕课MOOC</li>
+        <li @click="link('/resource/resourceshare')" >实证教学</li>
         <li @click="link('/resource/resourceshare')">模拟竞赛</li>
-        <li @click="link('/resource/resourceshare')" >安全教育</li>
+        <li @click="link('/resource/resourceshare')" >思政教育</li>
       </ul>
       <router-view></router-view>
 

@@ -2,23 +2,23 @@
    <div class="topbar">
       <img src="../assets/images/2.png" alt="" />
       <img src="../assets/images/1.png" alt=""  width="120"/>
-      <!-- <img src="../assets/images/d_xxgk.png" alt=""> -->
       <ul class="clearfix">
-        <li :class="{active:this.$route.path=='/home'}"><router-link to='/home'>首页</router-link></li>
-        <li :class="{active:this.$route.path.indexOf('center')>0?true:false}"><router-link to='/center'>中心概述</router-link></li>
-        <li :class="{active:this.$route.path.indexOf('project')>0?true:false}"><router-link to='/project'>项目介绍</router-link></li>
+        <li :class="{active:this.$route.path=='/home'}"><router-link to='/home'><span>{{$t('topbar.home')}}</span> </router-link></li>
+        <li :class="{active:this.$route.path.indexOf('center')>0?true:false}"><router-link to='/center'>{{$t('topbar.center')}}</router-link></li>
+        <li :class="{active:this.$route.path.indexOf('project')>0?true:false}"><router-link to='/project'>{{$t('topbar.project')}}</router-link></li>
         <li :class="{active:this.$route.path.indexOf('teacher')>0?true:false}"><router-link to='/teacher'>师资队伍</router-link></li>
         <li :class="{active:this.$route.path.indexOf('resource')>0?true:false}"><router-link to='/resource'>资源共享</router-link></li>
         <li :class="{active:this.$route.path.indexOf('news')>0?true:false}"><router-link to='/news'>新闻公告</router-link></li>
         <li :class="{active:this.$route.path.indexOf('enterprise')>0?true:false}"><router-link to='/enterprise'>校企合作</router-link></li>
+        <li :class="{active:this.$route.path.indexOf('mystyle')>0?true:false}"><router-link to='/mystyle'>系我风采</router-link></li>
         <li :class="{active:this.$route.path.indexOf('contact')>0?true:false}"><router-link to='/contact'>联系我们</router-link></li>
-
       </ul>
       <div class="circle" @click="fun()">
         <div></div>
         <div></div>
         <div></div>
       </div>
+         
     </div>
 </template>
 
@@ -33,7 +33,11 @@ export default {
    methods:{
       fun(){
         this.$router.push('/login')
-      }   
+      } ,
+        changeLanguage(){
+            this.$i18n.locale=='zh'?this.$i18n.locale='en':this.$i18n.locale='zh'   //设置中英文模式
+            sessionStorage.setItem('languageSet',this.$i18n.locale)   //将用户设置存储到localStorage以便用户下次打开时使用此设置
+        },  
    },
  created(){
      console.log(this.$route.path)

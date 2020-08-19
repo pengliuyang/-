@@ -1,7 +1,7 @@
 <template>
   <div class="teacher">
     <div class="banner">
-      <img src="../assets/images/组47.jpg" alt="" />
+      <img src="../assets/images/新闻公告.png" alt="" />
     </div>
     <div class="centeritems container clearfix">
       <ul v-show="this.$route.path.indexOf('noticedetail')>-1?false:true">

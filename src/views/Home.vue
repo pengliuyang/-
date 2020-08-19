@@ -1,11 +1,12 @@
 <template>
   <div class="home">
     <div class="banner">
-      <img src="../assets/images/logo.png" alt="" />
-      <p>跨国投资汇率风险管理虚拟仿真实训项目</p>
-      <div class="container" id="lunbo">
-        <div class="block">
-          <!-- <el-carousel trigger="click">
+      <div class="back">
+        <img src="../assets/images/logo.png" alt="" />
+        <p>跨国投资汇率风险管理虚拟仿真实训项目</p>
+        <div class="container" id="lunbo">
+          <div class="block">
+            <!-- <el-carousel trigger="click">
             <el-carousel-item v-for="item in arr" :key="item.id">
               <img :src="item.url" alt="" />
               <div class="box">
@@ -16,29 +17,30 @@
               </div>
             </el-carousel-item>
           </el-carousel> -->
-          <el-carousel trigger="click">
-            <el-carousel-item v-for="item in arr" :key="item">
-              <img :src="item.url" alt="" />
-              <div class="box">
-                <h3>{{item.title}}</h3>
-                <p>
-                {{item.contain}}
-                </p>
-              </div>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
-        <div class="right">
-          <p>虚拟仿真实验</p>
-          <span>项目入口</span>
-          <a href="" class="text">我要做实验</a>
-          <a href="" class="expert">专家通道</a>
+            <el-carousel trigger="click">
+              <el-carousel-item v-for="item in arr" :key="item.title">
+                <img :src="item.url" alt="" />
+                <div class="box">
+                  <h3>{{ item.title }}</h3>
+                  <p>
+                    {{ item.contain }}
+                  </p>
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <div class="right">
+            <p>虚拟仿真实验</p>
+            <span>项目入口</span>
+            <a href="" class="text">我要做实验</a>
+            <a href="" class="expert">专家通道</a>
+          </div>
         </div>
       </div>
     </div>
     <div class="title container">
       <div class="common">
-        <i class="icon teacher"></i><span>虚拟仿真教学</span>
+        <i class="icon teacher"></i><span>虚拟仿真教学资源</span>
       </div>
     </div>
     <div class="source container">
@@ -51,10 +53,10 @@
         </div>
         <div>
           <img src="../assets/images/资-11.png" alt="" />
-          <p class="china">实证科研</p>
-          <p class="english">Empircal research</p>
+          <p class="china">实证教学</p>
+          <p class="english">Empircal teaching</p>
         </div>
-        <div>
+        <div @click="link('/resource/databaseresource')">
           <img src="../assets/images/资-12.png" alt="" />
           <p class="china">数据资源</p>
           <p class="english">Data resource</p>
@@ -66,16 +68,18 @@
           <p class="china">模拟竞赛</p>
           <p class="english">Competions</p>
         </div>
-        <div>
+        <div @click="link('/resource/excellentmooc')">
           <img src="../assets/images/资-14.png" alt="" />
           <p class="china">精品慕课</p>
           <p class="english">Excellent<br />Courses-Mooc</p>
         </div>
-        <div>
+            <a href="http://bs.scu.edu.cn/xssixiangjiaoyu/">
+                 <div>
           <img src="../assets/images/资-15.png" alt="" />
-          <p class="china">安全教育</p>
-          <p class="english">safty Education</p>
+          <p class="china">思政教育</p>
+          <p class="english">Ideological and Political Education</p>
         </div>
+            </a>
       </div>
     </div>
     <div class="title container news">
@@ -95,8 +99,16 @@
             ref="items"
             >{{ item.name }}</span
           > -->
-          <span :class="{active:color=='news'}" @click="changecolor('news')">新闻</span>
-          <span :class="{active:color=='notice'}" @click="changecolor('notice')">公告</span>
+          <span
+            :class="{ active: color == 'news' }"
+            @click="changecolor('news')"
+            >新闻</span
+          >
+          <span
+            :class="{ active: color == 'notice' }"
+            @click="changecolor('notice')"
+            >公告</span
+          >
         </div>
         <!-- <div class="columphoto">
           <img :src="imglarge.bgImgUrl" alt="" />
@@ -116,7 +128,7 @@
             </p>
           </div>
         </div> -->
-        <div class="columphoto" v-for="item in news" :key="item">
+        <div class="columphoto" v-for="item in news" :key="item.id">
           <img :src="item.url" alt="" />
           <div class="columphotodetail">
             <h3>{{ item.title }}</h3>
@@ -132,7 +144,7 @@
             <p>{{ item.title }}</p>
             <p class="time">{{ item.createTime }}</p>
           </div> -->
-          <div v-for="item in newsitem" :key="item">
+          <div v-for="item in newsitem" :key="item.title">
             <img :src="item.url" alt="" />
             <p>{{ item.title }}</p>
             <p class="time">{{ item.time }}</p>
@@ -179,11 +191,6 @@
             background-color="#f3f3f3"
             text-color="#2d2d2d"
           >
-            <el-menu-item index="1"
-              ><a href="https://www.baidu.com" target="_blank"
-                >订单管理</a
-              ></el-menu-item
-            >
             <!-- <el-submenu
               :index="item.classifyName"
               v-for="item in treelistfilter"
@@ -212,20 +219,37 @@
               ><a href="https://www.baidu.com" target="_blank">{{
                 item.classifyName
               }}</a></el-menu-item> -->
-            <el-submenu index="3">
-              <template slot="title">我的工作台</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
-              <el-submenu index="3-3">
+              <el-submenu index="1">
+              <template slot="title">学校网站</template>
+              <el-menu-item index="1-1"><a href="http://bs.scu.edu.cn/kuaijixue/">四川大学商学院</a></el-menu-item>
+              <el-menu-item index="1-2"><a href="http://jwc.scu.edu.cn/">四川大学教务处</a></el-menu-item>
+              <el-menu-item index="1-2"><a href="http://scu.edu.cn/">四川大学官网</a></el-menu-item>
+              <!-- <el-submenu index="1-3">
                 <template slot="title">选项4</template>
-                <el-menu-item index="3-3-1">选项1</el-menu-item>
-                <el-menu-item index="3-3-2">选项2</el-menu-item>
-                <el-menu-item index="3-3-3">选项3</el-menu-item>
-              </el-submenu>
+                <el-menu-item index="1-3-1">选项1</el-menu-item>
+                <el-menu-item index="1-3-2">选项2</el-menu-item>
+                <el-menu-item index="1-3-3">选项3</el-menu-item>
+              </el-submenu> -->
             </el-submenu>
+            <el-submenu index="2">
+              <template slot="title">国家虚仿中心</template>
+              <el-menu-item index="2-1"><a href="">选项1</a></el-menu-item>
+              <el-menu-item index="2-2"><a href="">选项2</a></el-menu-item>
+            </el-submenu>
+             <el-submenu index="5">
+              <template slot="title">创新创业</template>
+              <el-menu-item index="5-1"><a href=" http://www.cxcyds.com/">中国创新创业大赛</a></el-menu-item>
+              <el-menu-item index="5-2"><a href="http://www.valuefan.cn/index.html">价值范</a></el-menu-item>
+              <el-menu-item index="5-2"><a href="http://www.beeui.com/">毕友网</a></el-menu-item>
+            </el-submenu>
+            <el-menu-item index="3"
+              ><a href="http://www.moe.gov.cn/" target="_blank"
+                >国家教育部网站</a
+              ></el-menu-item
+            >
             <el-menu-item index="4"
-              ><a href="https://www.baidu.com" target="_blank"
-                >订单管理</a
+              ><a href="http://edu.sc.gov.cn/" target="_blank"
+                >国家教育厅网站</a
               ></el-menu-item
             >
           </el-menu>
@@ -248,10 +272,24 @@ export default {
   data() {
     return {
       arr: [
-        {url:require("../assets/images/7.jpg"),title:"虚拟仿真项目1",contain:"内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"},
-        {url: require("../assets/images/5.jpg"),title:"虚拟仿真项目2",contain:"内容内容内容内容内容内容内容内容内容"},
-        {url: require("../assets/images/2.jpg"),title:"虚拟仿真项目3",contain:"内容内容内容内容内容内容内容内容内容"},
-       
+        {
+          url: require("../assets/images/风险识别与计量图片.jpg"),
+          title: "汇率风险识别与计量",
+          contain:
+            "汇率风险又称外汇风险或外汇暴露，是指一定时期的国际经济交易当中，以外币计价的资产与负债，由于汇率的波动而引起其价值涨跌的可能性。基本实验原理是提供真实的企业跨国投资情景环境，让学生根据情景，运用相关知识和方法对投资存在的汇率风险进行系统的分析和识别，并能够判断不同情景对汇率波动的影响大小。充分识别汇率风险后，学生应根据国际货币市场波动，利用正态VaR,历史模拟法，蒙特卡洛风险计量模型，对汇率波动造成的影响进行估计和测算。",
+        },
+        {
+          url: require("../assets/images/汇率管理工具图片.jpg"),
+          title: "汇率风险管理工具",
+          contain:
+            "汇率风险是跨国投资中最常见的风险，可以采取的应对手段主要包括：远期外汇合约（Forward contracts）、货币市场套期保值（Money market hedging）、外汇期货交易（Currency futures）、外汇期权交易（Currency options）。利用货币市场和期权期货交易市场，能够实现套期保值，降低跨国投资中的汇率风险。",
+        },
+        {
+          url: require("../assets/images/外汇期货交易图片.jpg"),
+          title: "外汇期货对冲交易",
+          contain:
+            "外汇期货交易的基本原理是，外汇买卖成交后，买卖双方均未提供现货，而仅提供若干的保证金，并订立契约，约定在未来某月依据约定的汇率办理实际收付的外汇业务。外汇期权交易的基本原理是通过购买期权增强交易的灵活性,即可以有权选择有利于自己的汇率进行外汇买卖,消除汇率变动带来的损失。",
+        },
       ],
       activeIndex: "1",
       carouselIds: [],
@@ -265,7 +303,7 @@ export default {
       news: [
         {
           url: require("../assets/images/5.jpg"),
-          title: "四川大学",
+          title: "四川大学1",
           contain: "这是新闻",
           time: "2020-07-20",
         },
@@ -273,32 +311,32 @@ export default {
       newsitem: [
         {
           url: require("../assets/images/5.jpg"),
-          title: "四川大学",
+          title: "四川大学2",
           time: "2020-07-30",
         },
         {
           url: require("../assets/images/5.jpg"),
-          title: "四川大学",
+          title: "四川大学3",
           time: "2020-07-30",
         },
         {
           url: require("../assets/images/5.jpg"),
-          title: "四川大学",
+          title: "四川大学4",
           time: "2020-07-30",
         },
         {
           url: require("../assets/images/5.jpg"),
-          title: "四川大学",
+          title: "四川大学5",
           time: "2020-07-30",
         },
       ],
-      color:"news",
+      color: "news",
     };
   },
 
   methods: {
-    fun() {
-      alert(0);
+    link(a) {
+      this.$router.push(a);
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -327,31 +365,31 @@ export default {
             time: "2020-07-20",
           },
         ];
-        this.newsitem=[
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-      ];
-      this.color="news"
+        this.newsitem = [
+          {
+            url: require("../assets/images/5.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+          {
+            url: require("../assets/images/5.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+          {
+            url: require("../assets/images/5.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+          {
+            url: require("../assets/images/5.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+        ];
+        this.color = "news";
       }
-         if (column == "notice") {
+      if (column == "notice") {
         this.news = [
           {
             url: require("../assets/images/2.jpg"),
@@ -360,29 +398,29 @@ export default {
             time: "2020-07-20",
           },
         ];
-        this.newsitem=[
-        {
-          url: require("../assets/images/2.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/2.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/2.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/2.jpg"),
-          title: "四川大学",
-          time: "2020-07-30",
-        },
-      ],
-       this.color="notice"
+        (this.newsitem = [
+          {
+            url: require("../assets/images/2.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+          {
+            url: require("../assets/images/2.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+          {
+            url: require("../assets/images/2.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+          {
+            url: require("../assets/images/2.jpg"),
+            title: "四川大学",
+            time: "2020-07-30",
+          },
+        ]),
+          (this.color = "notice");
       }
     },
   },
@@ -443,6 +481,14 @@ export default {
       margin: 0;
       margin-top: 15px;
     }
+    .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(75, 70, 70, 0.7);
+      top: 0;
+      left: 0;
+    }
   }
   .container {
     width: 1200px;
@@ -460,6 +506,9 @@ export default {
       .box {
         width: 460px;
         margin-left: 30px;
+        h3 {
+          font-size: 20px;
+        }
         p {
           text-align: left;
           width: 460px;
@@ -468,12 +517,12 @@ export default {
           white-space: normal !important;
           text-overflow: ellipsis;
           word-wrap: break-word;
-          -webkit-line-clamp:2;
+          -webkit-line-clamp: 11;
           -webkit-box-orient: vertical;
-          font-size: 20px;
           margin-top: 16px;
-          color: #000;
-          font-size: 18px;
+          color: #333;
+          font-size: 16px;
+          line-height: 30px;
         }
       }
       box-shadow: -1px 1px 1px 1px #ccc;
@@ -545,6 +594,9 @@ export default {
     // height: 10px;
     // border-radius: 5px;
   }
+  .el-carousel--horizontal{
+    overflow-y: hidden;
+  }
   .title {
     font-size: 20px;
     height: 30px;
@@ -601,9 +653,11 @@ export default {
       }
     }
   }
-  .sourceitems > div:hover {
+  .sourceitems  div:hover {
     transform: scale(1.1);
+    -ms-transform:scale(1.1);
     background: #bb2b18;
+    cursor: pointer;
     p {
       color: #fff;
     }
@@ -612,9 +666,9 @@ export default {
     margin-top: 90px;
     .allnews {
       font-size: 14px;
-      color: #d6d6d6;
       margin-top: 14px;
       cursor: pointer;
+      color: #8c8f94;
     }
   }
   .columnnews {
@@ -693,6 +747,7 @@ export default {
     .columphotoes > div:hover {
       box-shadow: 1px 1px 2px 1px #ccc;
       transform: scale(1.05);
+      -ms-transform:scale(1.05);
     }
   }
   .link {
@@ -715,6 +770,7 @@ export default {
       }
       .el-menu-item {
         font-size: 18px;
+     
       }
     }
     .visit,

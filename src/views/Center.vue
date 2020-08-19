@@ -8,6 +8,7 @@
         <li>中心概述</li>
         <li @click="link('/center/introduction')" :class="{active:this.$route.path.indexOf('introduction')>0?true:false}">中心简介</li>
         <li @click="link('/center/feature')" :class="{active:this.$route.path.indexOf('feature')>0?true:false}">中心特色</li>
+        <li @click="link('/center/guarantee')" :class="{active:this.$route.path.indexOf('guarantee')>0?true:false}">条件保障</li>
         <li @click="link()">现任领导</li>
         <li @click="link()">结构体系</li>
       </ul>
