@@ -74,7 +74,44 @@
 </template>
 
 <script>
-export default {};
+export default {
+   data() {
+    return {
+      currentPage: 1,
+      total:12,
+      tableData: [
+        {
+         imgurl:"",
+         name:"",
+         professor:"",
+         qualification:"",
+        }
+      ],
+    };
+  }, 
+    methods: {
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(`当前页: ${val}`);
+      this.querystock();
+    },
+    //     querystock() {
+    //   let params = {
+    //        currentpage: this.currentPage,
+    //   };
+    //   _queryStock(params)
+    //     .then(res => {
+    //       let {total, list} = res;
+    //       this.total = total;
+    //       this.tableData = list
+    //       console.log(this.tableData)
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // },
+  },
+};
 </script>
 
 <style lang="less" scoped>

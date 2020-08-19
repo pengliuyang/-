@@ -74,6 +74,12 @@ const routes = [
         component: () => import("../views/teacher/Teacherstaff.vue"),
         meta: { ispass: true },
       },
+      {
+        path: "teachersitems",
+        name: "teachersitems",
+        component: () => import("../views/teacher/Teacheritems.vue"),
+        meta: { ispass: true },
+      },
     ],
   },
   {

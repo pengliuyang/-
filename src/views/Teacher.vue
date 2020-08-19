@@ -9,7 +9,7 @@
         <li
           @click="link('/teacher/teacherstaff')"
           :class="{
-            active: this.$route.path.indexOf('teacherstaff') > 0 ? true : false,
+            active: this.$route.path.indexOf('teachers') > 0 ? true : false,
           }"
         >
           师资介绍

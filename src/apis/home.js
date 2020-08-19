@@ -44,3 +44,9 @@ export function _queryStock( params ){
         return res.data.data
     });
 }
+export function teacheritems( params ){
+    return axios.get('/article/articles/'+params
+     ).then(res=>{
+        return res.data.data
+    });
+}

@@ -3,9 +3,9 @@
       <img src="../assets/images/2.png" alt="" />
       <img src="../assets/images/1.png" alt=""  width="120"/>
       <ul class="clearfix">
-        <li :class="{active:this.$route.path=='/home'}"><router-link to='/home'><span>{{$t('topbar.home')}}</span> </router-link></li>
-        <li :class="{active:this.$route.path.indexOf('center')>0?true:false}"><router-link to='/center'>{{$t('topbar.center')}}</router-link></li>
-        <li :class="{active:this.$route.path.indexOf('project')>0?true:false}"><router-link to='/project'>{{$t('topbar.project')}}</router-link></li>
+        <li :class="{active:this.$route.path=='/home'}"><router-link to='/home'>首页</router-link></li>
+        <li :class="{active:this.$route.path.indexOf('center')>0?true:false}"><router-link to='/center'>中心概述</router-link></li>
+        <li :class="{active:this.$route.path.indexOf('project')>0?true:false}"><router-link to='/project'>项目简介</router-link></li>
         <li :class="{active:this.$route.path.indexOf('teacher')>0?true:false}"><router-link to='/teacher'>师资队伍</router-link></li>
         <li :class="{active:this.$route.path.indexOf('resource')>0?true:false}"><router-link to='/resource'>资源共享</router-link></li>
         <li :class="{active:this.$route.path.indexOf('news')>0?true:false}"><router-link to='/news'>新闻公告</router-link></li>

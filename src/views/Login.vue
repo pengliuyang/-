@@ -1,6 +1,8 @@
 <template>
   <div class="login">
-        <Topbar></Topbar>
+      
+        <div class="back">
+  <Topbar></Topbar>
         <div class="container loginform">
           <div class="photo">
             <img src="../assets/images/logo.png" alt="">
@@ -28,6 +30,7 @@
 <button class="prepare">实验前预习</button>
 </div>
           </div>
+        </div>
         </div>
   </div>
 </template>
@@ -75,8 +78,8 @@ export default {
 
 <style lang="less">
 .login{
-  display: flex;
-  flex-direction: column;
+  position: relative;
+
   width: 100%;
   height: 100%;
   background: url('../assets/images/矩形8.jpg');
@@ -173,6 +176,16 @@ export default {
     }
    }
   }
+      .back {
+      display: flex;
+     flex-direction: column;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(75, 70, 70, 0.7);
+      top: 0;
+      left: 0;
+    }
 }
 
 </style>
