@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" :style="{backgroundImage:'url('+imgUrl+')'}">
       
         <div class="back">
   <Topbar></Topbar>
@@ -43,6 +43,7 @@ export default {
   },
    data() {
       return {
+        imgUrl:require("../assets/images/8.jpg"),
         ruleForm: {
           name: '',
           password:""
@@ -82,7 +83,6 @@ export default {
 
   width: 100%;
   height: 100%;
-  background: url('../assets/images/矩形8.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   .loginform{
@@ -90,7 +90,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
    .photo{
      width: 500px;
      padding-right: 90px;

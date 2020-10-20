@@ -1,30 +1,34 @@
 <template>
   <div class="home">
     <div class="banner">
+      <img
+        :src="homeFormfirst.bannerurl"
+        alt=""
+        class="topbanner"
+     
+      />
       <div class="back">
-        <img src="../assets/images/logo.png" alt="" />
+        <img src="../assets/images/logo.png" alt="" class="icon" />
         <p>跨国投资汇率风险管理虚拟仿真实训项目</p>
         <div class="container" id="lunbo">
           <div class="block">
-            <!-- <el-carousel trigger="click">
-            <el-carousel-item v-for="item in arr" :key="item.id">
-              <img :src="item.url" alt="" />
-              <div class="box">
-                <h3>{{ item.title }}</h3>
-                <p>
-                  {{ item.description }}
-                </p>
-              </div>
-            </el-carousel-item>
-          </el-carousel> -->
             <el-carousel trigger="click">
-              <el-carousel-item v-for="item in arr" :key="item.title">
-                <img :src="item.url" alt="" />
+              <el-carousel-item
+                v-for="item in homeFormfirst.tableData"
+                :key="item.id"
+              >
+                <img v-if="item.isImg == 0" :src="item.url" alt="" />
+                <video
+                  class="carousevideo"
+                  v-if="item.isImg == 1"
+                  :src="item.url"
+                  controls
+                ></video>
                 <div class="box">
                   <h3>{{ item.title }}</h3>
-                  <p>
-                    {{ item.contain }}
-                  </p>
+                  <div class="description">
+                    {{ item.description }}
+                  </div>
                 </div>
               </el-carousel-item>
             </el-carousel>
@@ -32,7 +36,7 @@
           <div class="right">
             <p>虚拟仿真实验</p>
             <span>项目入口</span>
-            <a href="" class="text">我要做实验</a>
+            <a href="/ms/login" class="text">我要做实验</a>
             <a href="" class="expert">专家通道</a>
           </div>
         </div>
@@ -40,130 +44,83 @@
     </div>
     <div class="title container">
       <div class="common">
-        <i class="icon teacher"></i><span>虚拟仿真教学资源</span>
+        <i class="icon teacher"></i><span>{{ homeFormfirst.titleone }}</span>
       </div>
     </div>
     <div class="source container">
       <div class="sourceitems">
-        <div>
-          <img src="../assets/images/资源_画板 1.png" alt="" />
-
-          <p class="china">虚拟仿真实验</p>
-          <p class="english">Virtual simulation<br />project</p>
-        </div>
-        <div>
-          <img src="../assets/images/资-11.png" alt="" />
-          <p class="china">实证教学</p>
-          <p class="english">Empircal teaching</p>
-        </div>
-        <div @click="link('/resource/databaseresource')">
-          <img src="../assets/images/资-12.png" alt="" />
-          <p class="china">数据资源</p>
-          <p class="english">Data resource</p>
+        <div
+          v-for="value in homeFormfirst.links1"
+          :key="value.id"
+          @click="linkto(value)"
+        >
+          <img :src="value.icon" alt="" />
+          <p class="china">{{ value.title }}</p>
+          <p class="english">{{ value.englishTitle }}</p>
         </div>
       </div>
       <div class="sourceitems">
-        <div>
-          <img src="../assets/images/资-13.png" alt="" />
-          <p class="china">模拟竞赛</p>
-          <p class="english">Competions</p>
+        <div
+          v-for="value in homeFormfirst.links2"
+          :key="value.id"
+          @click="linkto(value)"
+        >
+          <img :src="value.icon" alt="" />
+          <p class="china">{{ value.title }}</p>
+          <p class="english">{{ value.englishTitle }}</p>
         </div>
-        <div @click="link('/resource/excellentmooc')">
-          <img src="../assets/images/资-14.png" alt="" />
-          <p class="china">精品慕课</p>
-          <p class="english">Excellent<br />Courses-Mooc</p>
-        </div>
-            <a href="http://bs.scu.edu.cn/xssixiangjiaoyu/">
-                 <div>
-          <img src="../assets/images/资-15.png" alt="" />
-          <p class="china">思政教育</p>
-          <p class="english">Ideological and Political Education</p>
-        </div>
-            </a>
       </div>
     </div>
     <div class="title container news">
       <div class="common">
         <!-- <i class="icon new"></i><span>{{ title }}</span> -->
-        <i class="icon new"></i><span>新闻公告</span>
+        <i class="icon new"></i><span>{{ homeFormfirst.titletwo }}</span>
       </div>
-      <span class="allnews" @click="allcontain()">全部内容 ></span>
+      <span class="allnews" @click="allcontain()">更多内容 ></span>
     </div>
     <div class="columnnews">
       <div class="column container">
         <div class="columnitems">
-          <!-- <span
-            v-for="item in columnlink"
-            :key="item.id"
-            @click="linkdetail(item.id, $event)"
-            ref="items"
-            >{{ item.name }}</span
-          > -->
           <span
-            :class="{ active: color == 'news' }"
-            @click="changecolor('news')"
-            >新闻</span
+            :class="{ active: color == 'left' }"
+            @click="changecolor('left')"
+            >{{ homeFormfirst.linkcolumn }}</span
           >
           <span
-            :class="{ active: color == 'notice' }"
-            @click="changecolor('notice')"
-            >公告</span
+            :class="{ active: color == 'right' }"
+            @click="changecolor('right')"
+            >{{ homeFormfirst.linkcolumntwo }}</span
           >
         </div>
-        <!-- <div class="columphoto">
-          <img :src="imglarge.bgImgUrl" alt="" />
+
+        <div
+          class="columphoto"
+          @click="
+            routelink(
+              homeFormfirst.linkcolumnarticletop.id,
+              homeFormfirst.linkcolumnarticletop.linkUrl
+            )
+          "
+        >
+          <img :src="homeFormfirst.linkcolumnarticletop.bgImgUrl" alt="" />
           <div class="columphotodetail">
-            <h3>{{ imglarge.title }}</h3>
-            <p>
-              {{ imglarge.description }}
-            </p>
-          </div>
-        </div> -->
-        <!-- <div class="columphoto">
-          <img src="../assets/images/5.jpg" alt="" />
-          <div class="columphotodetail">
-            <h3>1111</h3>
-            <p>
-              222222222222
-            </p>
-          </div>
-        </div> -->
-        <div class="columphoto" v-for="item in news" :key="item.id">
-          <img :src="item.url" alt="" />
-          <div class="columphotodetail">
-            <h3>{{ item.title }}</h3>
-            <p>
-              {{ item.contain }}
-            </p>
-            <span>{{ item.time }}</span>
+            <h3>{{ homeFormfirst.linkcolumnarticletop.title }}</h3>
+            <div
+              v-html="homeFormfirst.linkcolumnarticletop.textContent"
+              class="textcontent"
+            ></div>
+            <span>{{ homeFormfirst.linkcolumnarticletop.createTime }}</span>
           </div>
         </div>
         <div class="columphotoes">
-          <!-- <div v-for="item in imgsmall" :key="item.bgImgUrl">
+          <div
+            v-for="item in homeFormfirst.linkcolumnarticlebottom"
+            :key="item.id"
+          >
             <img :src="item.bgImgUrl" alt="" />
             <p>{{ item.title }}</p>
             <p class="time">{{ item.createTime }}</p>
-          </div> -->
-          <div v-for="item in newsitem" :key="item.title">
-            <img :src="item.url" alt="" />
-            <p>{{ item.title }}</p>
-            <p class="time">{{ item.time }}</p>
           </div>
-          <!-- <div>
-            <img src="../assets/images/5.jpg" alt="" />
-            <p>1</p>
-            <p class="time">2020-07-30</p>
-          </div>
-          <div>
-            <img src="../assets/images/5.jpg" alt="" />
-            <p>11</p>
-            <p class="time">2020-07-30</p>
-          </div>
-           <div>
-            <img src="../assets/images/5.jpg" alt="" />
-            <p>1</p>
-            <p class="time">2020-07-30</p>
-          </div> -->
         </div>
       </div>
     </div>
@@ -191,66 +148,30 @@
             background-color="#f3f3f3"
             text-color="#2d2d2d"
           >
-            <!-- <el-submenu
-              :index="item.classifyName"
-              v-for="item in treelistfilter"
-              :key="item"
+            <el-submenu
+              :index="value.id"
+              v-for="value in Datachild"
+              :key="value.id"
             >
-              <template slot="title">{{ item.classifyName }}</template>
+              <template slot="title">{{ value.classifyName }}</template>
               <el-menu-item
-                :index="children.linkUrl"
-                v-for="children in item.friendshipLink"
-                :key="children.title"
-                >{{ children.title }}</el-menu-item
+                :index="value.id"
+                v-for="value in value.friendshipLink"
+                :key="value.id"
               >
-              <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item>
-              <el-submenu index="2-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                <el-menu-item index="2-4-3">选项3</el-menu-item>
-              </el-submenu>
-            </el-submenu> -->
-            <!-- <el-menu-item
-              :index="item.classifyName"
-              v-for="item in small"
-              :key="item.classifyName"
-              ><a href="https://www.baidu.com" target="_blank">{{
-                item.classifyName
-              }}</a></el-menu-item> -->
-              <el-submenu index="1">
-              <template slot="title">学校网站</template>
-              <el-menu-item index="1-1"><a href="http://bs.scu.edu.cn/kuaijixue/">四川大学商学院</a></el-menu-item>
-              <el-menu-item index="1-2"><a href="http://jwc.scu.edu.cn/">四川大学教务处</a></el-menu-item>
-              <el-menu-item index="1-2"><a href="http://scu.edu.cn/">四川大学官网</a></el-menu-item>
-              <!-- <el-submenu index="1-3">
-                <template slot="title">选项4</template>
-                <el-menu-item index="1-3-1">选项1</el-menu-item>
-                <el-menu-item index="1-3-2">选项2</el-menu-item>
-                <el-menu-item index="1-3-3">选项3</el-menu-item>
-              </el-submenu> -->
+                <a :href="value.linkUrl" target="_blank">{{
+                  value.title
+                }}</a></el-menu-item
+              >
             </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">国家虚仿中心</template>
-              <el-menu-item index="2-1"><a href="">选项1</a></el-menu-item>
-              <el-menu-item index="2-2"><a href="">选项2</a></el-menu-item>
-            </el-submenu>
-             <el-submenu index="5">
-              <template slot="title">创新创业</template>
-              <el-menu-item index="5-1"><a href=" http://www.cxcyds.com/">中国创新创业大赛</a></el-menu-item>
-              <el-menu-item index="5-2"><a href="http://www.valuefan.cn/index.html">价值范</a></el-menu-item>
-              <el-menu-item index="5-2"><a href="http://www.beeui.com/">毕友网</a></el-menu-item>
-            </el-submenu>
-            <el-menu-item index="3"
-              ><a href="http://www.moe.gov.cn/" target="_blank"
-                >国家教育部网站</a
-              ></el-menu-item
+            <el-menu-item
+              v-for="value in Data"
+              :index="value.id"
+              :key="value.id"
             >
-            <el-menu-item index="4"
-              ><a href="http://edu.sc.gov.cn/" target="_blank"
-                >国家教育厅网站</a
-              ></el-menu-item
+              <a :href="value.linkUrl" target="_blank">{{
+                value.title
+              }}</a></el-menu-item
             >
           </el-menu>
         </div>
@@ -260,17 +181,95 @@
 </template>
 
 <script>
-// import { carousel } from "@/apis/home.js";
-// import { titlelink } from "@/apis/home.js";
-// import { getallPage } from "@/apis/home.js";
-// import { columnlink } from "@/apis/home.js";
-// import { columnlinkcontent } from "@/apis/home.js";
-// import { linkclassify } from "@/apis/home.js";
+import { getHomecolumn } from "@/apis/request.js";
+import { getHomebanner } from "@/apis/request.js";
+import { getHomecarouse } from "@/apis/request.js";
+import { getHomeheadline } from "@/apis/request.js";
+import { returnColumn } from "@/apis/request.js";
+import { getColumnarticle } from "@/apis/request.js";
+import { allColumn } from "@/apis/request.js";
+import { getHomelinks } from "@/apis/request.js";
+import { getHomelink } from "@/apis/request.js";
+import { getArticlemessage } from "@/apis/request.js";
 
 export default {
   name: "Home",
   data() {
     return {
+      Datachild: [],
+      Data: [],
+      imgUrl: "",
+      homeFormfirst: {
+        bannerurl: "",
+        columnIds: "",
+        tableData: [
+          // {
+          //   index: 1,
+          //   title: "四川大学1",
+          //   value1: true,
+          //   imageUrl:
+          //     "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+          // },
+        ],
+        links1: [],
+        links2: [],
+        frinedlinktableData: [
+          {
+            index: 1,
+            title: "四川大学",
+            class: "",
+            value: true,
+            address: "https://123",
+            options: [
+              {
+                value: "选项1",
+                label: "黄金糕",
+              },
+              {
+                value: "选项2",
+                label: "双皮奶",
+              },
+            ],
+          },
+          {
+            index: 1,
+            title: "四川大学",
+            class: "",
+            value: true,
+            address: "https://123",
+            options: [
+              {
+                value: "选项1",
+                label: "黄金糕",
+              },
+              {
+                value: "选项2",
+                label: "双皮奶",
+              },
+            ],
+          },
+        ],
+        frinedlinkmange: [
+          {
+            index: 1,
+            title: "四川大学",
+            value: true,
+          },
+          {
+            index: 1,
+            title: "四川大学",
+            value: true,
+          },
+        ],
+        titleone: "",
+        titletwo: "",
+        linkcolumn: [],
+        linkcolumntwo: [],
+        linkcolumnarticletop: {},
+        linkcolumnarticlebottom: [],
+      },
+
+      id: 0,
       arr: [
         {
           url: require("../assets/images/风险识别与计量图片.jpg"),
@@ -330,132 +329,421 @@ export default {
           time: "2020-07-30",
         },
       ],
-      color: "news",
+      color: "left",
+      flag: false,
     };
   },
-
+  components: {
+    // Bootommenu,
+    // Contain,
+  },
   methods: {
     link(a) {
       this.$router.push(a);
     },
+    routelink(id, url) {
+      if (
+        this.$store.state.columnmessage.styleType == 0 ||
+        this.$store.state.columnmessage.styleType == 1
+      ) {
+        getArticlemessage(id).then((res) => {
+          console.log(res, 7);
+          allColumn().then((data) => {
+          console.log(res,6)
+            var a = this.familyTree(data, res[0].columnId).length - 1;
+            if (this.familyTree(data, res[0].columnId)[a]) {
+              var id = this.familyTree(data, res[0].columnId)[a].id;
+            }
+
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].id == res[0].columnId) {
+                this.flag = true;
+                const { href } = this.$router.resolve({
+                  path:
+                    "/ChuanDa/" +
+                    res[0].columnId +
+                    "/leftmenu/" +
+                    0 +
+                    "/description/" +
+                    res[0].id,
+                });
+           
+                if (this.$store.state.columnmessage.openMethod == 1) {
+                  returnColumn(res[0].columnId).then((res) => {
+                    this.$store.state.columnmessage.styleType =
+                      res[0].styleType;
+                    localStorage.setItem(
+                      "styleType",
+                      this.$store.state.columnmessage.styleType
+                    );
+                    console.log(
+                      this.$store.state.columnmessage.styleType,
+                      "con"
+                    );
+                    window.open(href, "_blank");
+                  });
+                } else {
+                  returnColumn(res[0].columnId).then((res) => {
+                    this.$store.state.columnmessage.styleType =
+                      res[0].styleType;
+                    console.log(
+                      this.$store.state.columnmessage.styleType,
+                      "con"
+                    );
+                    window.open(href, "_self");
+                  });
+                }
+              }
+            }
+            if (this.flag == false) {
+              console.log(res, id,6);
+              const { href } = this.$router.resolve({
+                path:
+                  "/ChuanDa/" +
+                  id +
+                  "/leftmenu/" +
+                  res[0].columnId +
+                  "/description/" +
+                  res[0].id,
+              });
+              if (this.$store.state.columnmessage.openMethod == 1) {
+                localStorage.setItem(
+                  "styleType",
+                  this.$store.state.columnmessage.styleType
+                );
+                window.open(href, "_blank");
+                console.log(this.$store.state.columnmessage.styleType, "con1");
+              } else {
+                  localStorage.setItem(
+                  "styleType",
+                  this.$store.state.columnmessage.styleType
+                );
+                console.log(this.$store.state.columnmessage.styleType, "con2");
+                window.open(href, "_self");
+              }
+              // console.log(this.$store.state.columnmessage.id, 1);
+            }
+          });
+        });
+      } else {
+        getArticlemessage(id).then((res) => {
+          console.log(res, 1);
+          if (res[0].linkType == 1) {
+            location.href = url;
+          } else {
+            allColumn().then((data) => {
+              console.log(this.familyTree(data, res[0].linkColumnId), 2);
+              var a = this.familyTree(data, res[0].linkColumnId).length - 1;
+              var id = this.familyTree(data, res[0].linkColumnId)[a].id;
+              for (let i = 0; i < data.length; i++) {
+                if (data[i].id == res[0].linkColumnId) {
+                  this.flag = true;
+                  const { href } = this.$router.resolve({
+                    path:
+                      "/ChuanDa/" +
+                      res[0].linkColumnId +
+                      "/leftmenu/" +
+                      0 +
+                      "/description/" +
+                      res[0].linkArticleId,
+                  });
+                  if (this.$store.state.columnmessage.openMethod == 1) {
+                    returnColumn(res[0].linkColumnId).then((res) => {
+                      this.$store.state.columnmessage.styleType =
+                        res[0].styleType;
+                      localStorage.setItem(
+                        "styleType",
+                        this.$store.state.columnmessage.styleType
+                      );
+                      //  localStorage.removeItem('styleType')
+                      console.log(
+                        this.$store.state.columnmessage.styleType,
+                        "con"
+                      );
+                      window.open(href, "_blank");
+                    });
+                  } else {
+                    returnColumn(res[0].linkColumnId).then((res) => {
+                      this.$store.state.columnmessage.styleType =
+                        res[0].styleType;
+                      console.log(
+                        this.$store.state.columnmessage.styleType,
+                        "con"
+                      );
+                      window.open(href, "_self");
+                    });
+                  }
+                }
+              }
+              if (this.flag == false) {
+                console.log(res, "o");
+                const { href } = this.$router.resolve({
+                  path:
+                    "/ChuanDa/" +
+                    id +
+                    "/leftmenu/" +
+                    res[0].linkColumnId +
+                    "/description/" +
+                    res[0].linkArticleId,
+                });
+                if (this.$store.state.columnmessage.openMethod == 1) {
+                  localStorage.setItem(
+                    "styleType",
+                    this.$store.state.columnmessage.styleType
+                  );
+                  window.open(href, "_blank");
+                  console.log(
+                    this.$store.state.columnmessage.styleType,
+                    "con1"
+                  );
+                } else {
+                  console.log(
+                    this.$store.state.columnmessage.styleType,
+                    "con2"
+                  );
+                  window.open(href, "_self");
+                }
+                console.log(this.$store.state.columnmessage.id, 1);
+              }
+            });
+          }
+        });
+      }
+    },
+    linkto(val) {
+      console.log(val, 66);
+      if (val.linkType == 0) {
+        allColumn().then((data) => {
+          var columnid = val.linkColumnId;
+          var a = this.familyTree(data, columnid).length - 1;
+          var id = this.familyTree(data, columnid)[a].id;
+          console.log(id);
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].id == columnid) {
+              this.flag = true;
+              if (val.linkArticleId != "") {
+                const { href } = this.$router.resolve({
+                  path:
+                    "/ChuanDa/" +
+                    columnid +
+                    "/leftmenu/" +
+                    0 +
+                    "/description/" +
+                    val.linkArticleId,
+                });
+                returnColumn(columnid).then((res) => {
+                  this.$store.state.columnmessage.styleType = res[0].styleType;
+                  localStorage.setItem(
+                    "styleType",
+                    this.$store.state.columnmessage.styleType
+                  );
+
+                  window.open(href, "_blank");
+                });
+              } else {
+                const { href } = this.$router.resolve({
+                  path: "/ChuanDa/" + columnid + "/leftmenu/0",
+                });
+                window.open(href, "_blank");
+              }
+            }
+          }
+          if (this.flag == false) {
+            if (val.linkArticleId != "") {
+              const { href } = this.$router.resolve({
+                path:
+                  "/ChuanDa/" +
+                  id +
+                  "/leftmenu/" +
+                  columnid +
+                  "/description/" +
+                  val.linkArticleId,
+              });
+              returnColumn(columnid).then((res) => {
+                this.$store.state.columnmessage.styleType = res[0].styleType;
+                localStorage.setItem(
+                  "styleType",
+                  this.$store.state.columnmessage.styleType
+                );
+
+                window.open(href, "_blank");
+              });
+            } else {
+              const { href } = this.$router.resolve({
+                path: "/ChuanDa/" + id + "/leftmenu/" + columnid,
+              });
+              window.open(href, "_blank");
+            }
+          }
+        });
+      } else {
+        location.href = val.linkUrl;
+      }
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
+    familyTree(arr1, id) {
+      var temp = [];
+      var forFn = function(arr, id) {
+        for (var i = 0; i < arr.length; i++) {
+          var item = arr[i];
+          if (item.id === id) {
+            temp.push(item);
+            forFn(arr1, item.parentId);
+            break;
+          } else {
+            if (item.children) {
+              forFn(item.children, id);
+            }
+          }
+        }
+      };
+      forFn(arr1, id);
+      return temp;
+    },
     allcontain() {
-      this.$router.push("/news/notice");
+      if (this.color == "left") {
+        allColumn().then((data) => {
+          var columnid = Number(this.homeFormfirst.columnIds[0]);
+          var a = this.familyTree(data, columnid).length - 1;
+          var id = this.familyTree(data, columnid)[a].id;
+          console.log(id);
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].id == this.homeFormfirst.columnIds[0]) {
+              this.flag = true;
+              const { href } = this.$router.resolve({
+                path:
+                  "/ChuanDa/" + this.homeFormfirst.columnIds[0] + "/leftmenu/0",
+              });
+              window.open(href, "_self");
+            }
+          }
+          if (this.flag == false) {
+            const { href } = this.$router.resolve({
+              path:
+                "/ChuanDa/" +
+                id +
+                "/leftmenu/" +
+                this.homeFormfirst.columnIds[0],
+            });
+            window.open(href, "_self");
+          }
+        });
+      }
+      if (this.color == "right") {
+        console.log("yes");
+        allColumn().then((data) => {
+          var columnid = Number(this.homeFormfirst.columnIds[1]);
+          var a = this.familyTree(data, columnid).length - 1;
+          var id = this.familyTree(data, columnid)[a].id;
+          console.log(id);
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].id == this.homeFormfirst.columnIds[1]) {
+              this.flag = true;
+              const { href } = this.$router.resolve({
+                path:
+                  "/ChuanDa/" + this.homeFormfirst.columnIds[1] + "/leftmenu/0",
+              });
+              window.open(href, "_self");
+            }
+          }
+          if (this.flag == false) {
+            const { href } = this.$router.resolve({
+              path:
+                "/ChuanDa/" +
+                id +
+                "/leftmenu/" +
+                this.homeFormfirst.columnIds[1],
+            });
+            window.open(href, "_self");
+          }
+        });
+      }
     },
-    // linkdetail(id, event) {
-    //   columnlinkcontent(id).then((res) => {
-    //     this.imglarge = res[0];
-    //     this.imgsmall = res.splice(1, 4);
-    //     for (var i = 0; i < this.$refs.items.length; i++) {
-    //       this.$refs.items[i].className = "";
-    //     }
-    //     event.target.className = "active";
-    //   });
-    //   console.log(this.treelistfilter);
-    // },
     changecolor(column) {
-      if (column == "news") {
-        this.news = [
-          {
-            url: require("../assets/images/5.jpg"),
-            title: "四川大学新闻",
-            contain: "这是新闻",
-            time: "2020-07-20",
-          },
-        ];
-        this.newsitem = [
-          {
-            url: require("../assets/images/5.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-          {
-            url: require("../assets/images/5.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-          {
-            url: require("../assets/images/5.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-          {
-            url: require("../assets/images/5.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-        ];
-        this.color = "news";
+      if (column == "left") {
+        getColumnarticle(this.homeFormfirst.columnIds[0], 1).then((res) => {
+          if (res) {
+            this.homeFormfirst.linkcolumnarticletop = res.list[0];
+            this.homeFormfirst.linkcolumnarticlebottom = res.list.splice(1, 4);
+          }
+        });
+        returnColumn(this.homeFormfirst.columnIds[0]).then((res) => {
+          this.$store.state.columnmessage.styleType = res[0].styleType;
+          this.$store.state.columnmessage.openMethod = res[0].openMethod;
+          console.log(res, 9);
+        });
+        this.color = "left";
       }
-      if (column == "notice") {
-        this.news = [
-          {
-            url: require("../assets/images/2.jpg"),
-            title: "四川大学公告",
-            contain: "这是公告",
-            time: "2020-07-20",
-          },
-        ];
-        (this.newsitem = [
-          {
-            url: require("../assets/images/2.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-          {
-            url: require("../assets/images/2.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-          {
-            url: require("../assets/images/2.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-          {
-            url: require("../assets/images/2.jpg"),
-            title: "四川大学",
-            time: "2020-07-30",
-          },
-        ]),
-          (this.color = "notice");
+      if (column == "right") {
+        getColumnarticle(this.homeFormfirst.columnIds[1], 1).then((res) => {
+          if (res) {
+            this.homeFormfirst.linkcolumnarticletop = res.list[0];
+            this.homeFormfirst.linkcolumnarticlebottom = res.list.splice(1, 4);
+          }
+        });
+        returnColumn(this.homeFormfirst.columnIds[0]).then((res) => {
+          this.$store.state.columnmessage.styleType = res[0].styleType;
+          this.$store.state.columnmessage.openMethod = res[0].openMethod;
+          console.log(res, 9);
+        });
+        this.color = "right";
       }
     },
   },
-  computed: {
-    // treelistfilter() {
-    //   return this.treelist.filter((value) => {
-    //     if (value.friendshipLink.length == 0) {
-    //       this.small.push(value) ;
-    //       console.log(this.small);
-    //     }
-    //     return value.friendshipLink.length;
-    //   });
-    // },
-  },
+
   mounted() {
-    // getallPage().then((res) => {
-    //   titlelink(res[0].headline2Id).then((res) => {
-    //     this.title = res[0].title;
-    //   });
-    //   columnlink(res[0].columnIds).then((res) => {
-    //     res.map((res) => {
-    //       if (res.level == 2) {
-    //         this.columnlink.push({ name: res.columnName, id: res.id });
-    //       }
-    //     });
-    //     columnlinkcontent(this.columnlink[0].id).then((res) => {
-    //       this.imglarge = res[0];
-    //       this.imgsmall = res.splice(1, 4);
-    //     });
-    //   });
-    //   linkclassify(res[0].friendshipLinkIds).then((res) => {
-    //     this.treelist = res;
-    //     console.log(this.treelist);
-    //   });
-    // });
+    getHomecolumn().then((res) => {
+      this.homeFormfirst.columnIds = res[0].columnIds.split(",");
+      getHomebanner(res[0].bgImgId).then((res) => {
+        this.homeFormfirst.bannerurl = res[0].imgUrl;
+        console.log(res, 9);
+      });
+      getHomecarouse(res[0].carouselIds).then((res) => {
+        this.homeFormfirst.tableData = res.filter((res) => {
+          if (res.isOpen == 0) {
+            return res;
+          }
+        });
+      });
+      getHomeheadline(res[0].headline1Id).then((res) => {
+        this.homeFormfirst.titleone = res[0].title;
+      });
+      getHomelinks(res[0].linkIds).then((res) => {
+        this.homeFormfirst.links1 = res.splice(0, 3);
+        this.homeFormfirst.links2 = res;
+        console.log(res, "ply");
+      });
+      getHomeheadline(res[0].headline2Id).then((res) => {
+        this.homeFormfirst.titletwo = res[0].title;
+      });
+      returnColumn(this.homeFormfirst.columnIds[0]).then((res) => {
+        this.homeFormfirst.linkcolumn = res[0].columnName;
+        this.$store.state.columnmessage.styleType = res[0].styleType;
+        this.$store.state.columnmessage.showType = res[0].showType;
+        this.$store.state.columnmessage.openMethod = res[0].openMethod;
+        console.log(res, 9);
+      });
+
+      returnColumn(this.homeFormfirst.columnIds[1]).then((res) => {
+        this.homeFormfirst.linkcolumntwo = res[0].columnName;
+      });
+      getColumnarticle(this.homeFormfirst.columnIds[0], 1).then((res) => {
+        if (res) {
+          this.homeFormfirst.linkcolumnarticletop = res.list[0];
+          console.log(this.homeFormfirst.linkcolumnarticletop, 666);
+          this.homeFormfirst.linkcolumnarticlebottom = res.list.splice(1, 4);
+        }
+        console.log(res, 0);
+      });
+    });
+    getHomelink().then((res) => {
+      console.log(res, 666);
+      this.Datachild = res[0];
+      // console.log(this.Datachild, 8);
+      this.Data = res[1];
+    });
   },
 };
 </script>
@@ -464,15 +752,16 @@ export default {
   font-family: "Source Han Serif CN";
   .banner {
     width: 100%;
-    height: 300px;
-    background: url("../assets/images/banner.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    height: 400px;
+    .topbanner {
+      width: 100%;
+      height: 400px;
+    }
     text-align: center;
     position: relative;
-    margin-bottom: 410px;
-    img {
-      margin-top: 50px;
+    margin-bottom: 260px;
+    .icon {
+      margin-top: 40px;
     }
     p {
       color: #ffffff;
@@ -497,19 +786,19 @@ export default {
   #lunbo {
     display: flex;
     justify-content: space-between;
-    height: 372px;
-    margin-top: 50px;
+    height: 360px;
+    margin-top: 30px;
     .block {
       width: 1000px;
-      height: 371px;
+      height: 360px;
       background: #fff;
       .box {
         width: 460px;
         margin-left: 30px;
         h3 {
-          font-size: 20px;
+          font-size: 24px;
         }
-        p {
+        .description {
           text-align: left;
           width: 460px;
           display: -webkit-box;
@@ -525,7 +814,7 @@ export default {
           line-height: 30px;
         }
       }
-      box-shadow: -1px 1px 1px 1px #ccc;
+      box-shadow: -2px 2px 12px 0px #ccc;
     }
     .right {
       width: 200px;
@@ -564,7 +853,7 @@ export default {
     }
   }
   .el-carousel__container {
-    height: 372px;
+    height: 360px;
     width: 1000px;
   }
   .el-carousel__item {
@@ -575,30 +864,32 @@ export default {
       margin-left: 28px;
       margin-top: 28px;
     }
+    .carousevideo {
+      width: 450px;
+      height: 290px;
+      object-fit: fill;
+      margin-left: 28px;
+      margin-top: 28px;
+    }
+    .carousevideo:focus {
+      outline: none;
+    }
     h3 {
-      color: red;
+      // color: red;
       font-size: 20px;
       margin-top: 30px;
       text-align: left;
     }
   }
-  // .el-carousel__item {
-  //   background-color: #ccc;
-  // }
-  // .el-carousel__item:nth-child(2n + 1) {
-  //   background-color: #d3dce6;
-  // }
+
   .el-carousel__indicator--horizontal .el-carousel__button {
     background: red;
-    // width: 10px;
-    // height: 10px;
-    // border-radius: 5px;
   }
-  .el-carousel--horizontal{
+  .el-carousel--horizontal {
     overflow-y: hidden;
   }
   .title {
-    font-size: 20px;
+    font-size: 26px;
     height: 30px;
     display: flex;
     justify-content: space-between;
@@ -614,7 +905,7 @@ export default {
       background: url("../assets/images/icon_new.png");
     }
     .icon {
-      margin-top: 2px;
+      margin-top: 1px;
       display: inline-block;
       width: 30px;
       height: 30px;
@@ -622,9 +913,9 @@ export default {
       background-size: 100%;
       margin-right: 10px;
     }
-    span {
-      margin-top: 10px;
-    }
+    // span {
+    //   margin-top: 10px;
+    // }
   }
   .sourceitems {
     display: flex;
@@ -635,28 +926,33 @@ export default {
       // background: orange;
       text-align: center;
       margin-top: 30px;
-      box-shadow: 1px 1px 5px #ccc;
+      box-shadow: 1px 1px 8px #ccc;
       p {
         margin-top: 10px;
       }
       .china {
         font-size: 24px;
         color: #2d2d2d;
+        margin-top: 16px;
       }
       .english {
         color: #999999;
         font-size: 18px;
+        width: 200px;
+        margin: 18px auto;
       }
       img {
         width: 80px;
         height: 80px;
+        margin-top: 20px;
       }
     }
   }
-  .sourceitems  div:hover {
+  .sourceitems div:hover {
     transform: scale(1.1);
-    -ms-transform:scale(1.1);
+    -ms-transform: scale(1.1);
     background: #bb2b18;
+
     cursor: pointer;
     p {
       color: #fff;
@@ -684,7 +980,7 @@ export default {
         margin-left: 80px;
         margin-bottom: 40px;
         border-bottom: 6px solid transparent;
-        font-size: 18px;
+        font-size: 22px;
         cursor: pointer;
       }
       span:hover {
@@ -696,6 +992,7 @@ export default {
     }
     .columphoto {
       display: flex;
+      cursor: pointer;
       img {
         width: 580px;
         height: 350px;
@@ -704,17 +1001,27 @@ export default {
         padding: 20px 30px;
         width: 560px;
         height: 310px;
-        background: rgb(143, 139, 139);
+        background: rgb(241, 238, 238);
         position: relative;
-        p {
+        h3{
+          font-size: 22px;
+        }
+        .textcontent {
           display: -webkit-box;
           overflow: hidden;
           white-space: normal !important;
           text-overflow: ellipsis;
           word-wrap: break-word;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 7;
           -webkit-box-orient: vertical;
-          margin-top: 20px;
+          line-height: 28px;
+          margin-top: 10px;
+          img{
+            display: none;
+          }
+          video{
+            display: none;
+          }
         }
         span {
           color: #ccc;
@@ -737,7 +1044,8 @@ export default {
           height: 168px;
         }
         p {
-          margin-top: 10px;
+          margin-top: 14px;
+          margin-left: 8px;
         }
         .time {
           color: #ccc;
@@ -745,9 +1053,9 @@ export default {
       }
     }
     .columphotoes > div:hover {
-      box-shadow: 1px 1px 2px 1px #ccc;
+      box-shadow: 1px 1px 8px 0px #ccc;
       transform: scale(1.05);
-      -ms-transform:scale(1.05);
+      -ms-transform: scale(1.05);
     }
   }
   .link {
@@ -770,7 +1078,6 @@ export default {
       }
       .el-menu-item {
         font-size: 18px;
-     
       }
     }
     .visit,
@@ -813,5 +1120,23 @@ export default {
       }
     }
   }
+  // .el-menu-item:hover {
+  //   background-color: #ccc !important;
+  // }
+  // .el-menu-item.is-active {
+  //   color: #000;
+  //   background-color: #ccc !important;
+  // }
+  // .el-menu--horizontal>.el-submenu .el-submenu__title {
+  //  font-size: 18px !important;
+  // }
+  //  .el-submenu .el-submenu__title:hover {
+  //   background: #ccc !important;
+  // }
+
+  // .el-submenu.is-opened .el-submenu__title {
+  //    background: #ccc !important;
+  //   color: #fff;
+  // }
 }
 </style>

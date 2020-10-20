@@ -15,10 +15,7 @@ export default {
     Bottom,
   },
   methods: {
-     changeLanguage(){
-            this.$i18n.locale=='zh'?this.$i18n.locale='en':this.$i18n.locale='zh'   //设置中英文模式
-            sessionStorage.setItem('languageSet',this.$i18n.locale)   //将用户设置存储到localStorage以便用户下次打开时使用此设置
-        },
+ 
   },
 };
 </script>
