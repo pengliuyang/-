@@ -4,9 +4,12 @@
       class="centeritemdetailtwo"
       v-if="this.$store.state.columnmessage.styleType == 1"
     >
-      <div class="title" v-if=" this.$store.state.columnmessage.data.length!=1">
+      <div
+        class="title"
+        v-if="this.$store.state.columnmessage.data.length != 1"
+      >
         <!-- <span>中心简介</span> -->
-        <span class="link" @click="route" >&lt;&emsp;返回</span>
+        <span class="link" @click="route">&lt;&emsp;返回</span>
       </div>
       <div class="titlebottom">
         <h3>{{ article.title }}</h3>
@@ -18,7 +21,10 @@
       class="centeritemdetailone"
       v-if="this.$store.state.columnmessage.styleType == 0"
     >
-      <div class="title"  v-if=" this.$store.state.columnmessage.data.length!=1">
+      <div
+        class="title"
+        v-if="this.$store.state.columnmessage.data.length != 1"
+      >
         <!-- <span>条件保障</span> -->
         <!-- {{this.$route.params.b}} -->
         <span class="link" @click="route">&lt;&emsp;返回</span>
@@ -77,7 +83,7 @@ export default {
   },
   methods: {
     route() {
-      console.log( this.$store.state.bottomcolumnid,7)
+      console.log(this.$store.state.bottomcolumnid, 7);
       this.$router.push({
         path:
           `/ChuanDa/` +
@@ -100,14 +106,16 @@ export default {
     },
   },
   created() {
-if(localStorage.getItem('styleType')){
-  this.$store.state.columnmessage.styleType=localStorage.getItem('styleType');
-  localStorage.removeItem('styleType')
-}
-console.log(this.$store.state.columnmessage.styleType,'ply1')
+    if (localStorage.getItem("styleType")) {
+      this.$store.state.columnmessage.styleType = localStorage.getItem(
+        "styleType"
+      );
+      localStorage.removeItem("styleType");
+    }
+    console.log(this.$store.state.columnmessage.styleType, "ply1");
     this.$store.state.columnmessage.id = this.$route.params.id;
     getArticlemessage(this.$route.params.b).then((res) => {
-      console.log(res,1)
+      console.log(res, 1);
       this.article = res[0];
       this.playerOptions.sources = res[0].videoUrl;
       returnColumn(res[0].columnId).then((res) => {
@@ -118,12 +126,12 @@ console.log(this.$store.state.columnmessage.styleType,'ply1')
         this.$store.state.columnmessage.english = res[0].english;
         console.log(this.$store.state.columnmessage.styleType, 3);
       });
-        getColumnarticle(res[0].columnId, 1).then((res) => {
+      getColumnarticle(res[0].columnId, 1).then((res) => {
         this.$store.state.columnmessage.data = res.list;
         this.$store.state.columnmessage.total = res.total;
       });
     });
-    console.log(  this.$store.state.columnmessage.styleType,'ply2')
+    console.log(this.$store.state.columnmessage.styleType, "ply2");
   },
 };
 </script>
@@ -137,7 +145,7 @@ console.log(this.$store.state.columnmessage.styleType,'ply1')
     justify-content: flex-end;
     font-size: 18px;
     padding-bottom: 10px;
-    padding-top: 20px;
+    padding-top: 26px;
     border-bottom: 2px solid #ccc;
     font-size: 18px;
     color: #2d2d2d;
@@ -204,7 +212,7 @@ console.log(this.$store.state.columnmessage.styleType,'ply1')
     justify-content: flex-end;
     font-size: 18px;
     padding-bottom: 10px;
-    padding-top: 20px;
+    padding-top: 26px;
     border-bottom: 2px solid #ccc;
     color: #2d2d2d;
     font-size: 18px;
@@ -238,6 +246,6 @@ console.log(this.$store.state.columnmessage.styleType,'ply1')
       color: #999;
     }
   }
-  margin-bottom: 180px;
+  margin-bottom: 200px;
 }
 </style>

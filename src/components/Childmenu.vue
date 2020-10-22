@@ -104,12 +104,17 @@ export default {
   color: #000 !important;
   background-color: #f3f3f3 !important;
 }
-.el-menu-vertical-demo .el-submenu .el-submenu__title:hover {
-  background: #bb2a17 !important;
-}
-// .el-menu-vertical-demo .el-submenu .el-submenu__title {
-//  background-color:#f3f3f3 !important;
+// .ant-carousel >>> .slick-slide {
+//   text-align: center;
+//   height: 160px;
+//   line-height: 160px;
+//   background: #364d79;
+//   overflow: hidden;
 // }
+
+.el-menu-vertical-demo .el-submenu .el-submenu__title:hover {
+  background: #bb2a17 !important
+}
 .el-menu-vertical-demo .el-submenu.is-opened .el-submenu__title {
    background: #bb2a17 !important;
   color: #fff;

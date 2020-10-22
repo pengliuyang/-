@@ -1,5 +1,6 @@
 <template>
       <div class="bottom" >
+      
       <div class="container">
         <div class="left">
           <img src="../assets/images/bottombar_icon_call.png" alt="" />
@@ -18,7 +19,6 @@
           </div>
         </div>
       </div>
-   
     </div>
 </template>
 <script>
@@ -29,6 +29,16 @@ export default {
 
 <style lang="less">
   .bottom {
+    // input{
+    //   border: 0px;
+    // }
+    // input:focus{
+    //   border: 1px solid red;
+    //   outline: none;
+    // }
+    // input:hover{
+    //    border: 1px solid red;
+    // }
      font-family: 'Source Han Serif CN';
     height: 200px;
     background: url("../assets/images/bottombar_bg.png");

@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <div id="ply">
+    
     <div class="banner">
       <img
         :src="homeFormfirst.bannerurl"
@@ -25,7 +26,8 @@
                   controls
                 ></video>
                 <div class="box">
-                  <h3>{{ item.title }}</h3>
+                  <!-- <h3>{{ item.title }}</h3> -->
+                  <div class="carousetitle">{{ item.title }}</div>
                   <div class="description">
                     {{ item.description }}
                   </div>
@@ -104,7 +106,7 @@
         >
           <img :src="homeFormfirst.linkcolumnarticletop.bgImgUrl" alt="" />
           <div class="columphotodetail">
-            <h3>{{ homeFormfirst.linkcolumnarticletop.title }}</h3>
+            <p class="titletop">{{ homeFormfirst.linkcolumnarticletop.title }}</p>
             <div
               v-html="homeFormfirst.linkcolumnarticletop.textContent"
               class="textcontent"
@@ -203,13 +205,7 @@ export default {
         bannerurl: "",
         columnIds: "",
         tableData: [
-          // {
-          //   index: 1,
-          //   title: "四川大学1",
-          //   value1: true,
-          //   imageUrl:
-          //     "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
-          // },
+
         ],
         links1: [],
         links2: [],
@@ -225,10 +221,6 @@ export default {
                 value: "选项1",
                 label: "黄金糕",
               },
-              {
-                value: "选项2",
-                label: "双皮奶",
-              },
             ],
           },
           {
@@ -241,20 +233,11 @@ export default {
               {
                 value: "选项1",
                 label: "黄金糕",
-              },
-              {
-                value: "选项2",
-                label: "双皮奶",
-              },
+              }
             ],
           },
         ],
         frinedlinkmange: [
-          {
-            index: 1,
-            title: "四川大学",
-            value: true,
-          },
           {
             index: 1,
             title: "四川大学",
@@ -268,27 +251,8 @@ export default {
         linkcolumnarticletop: {},
         linkcolumnarticlebottom: [],
       },
-
       id: 0,
       arr: [
-        {
-          url: require("../assets/images/风险识别与计量图片.jpg"),
-          title: "汇率风险识别与计量",
-          contain:
-            "汇率风险又称外汇风险或外汇暴露，是指一定时期的国际经济交易当中，以外币计价的资产与负债，由于汇率的波动而引起其价值涨跌的可能性。基本实验原理是提供真实的企业跨国投资情景环境，让学生根据情景，运用相关知识和方法对投资存在的汇率风险进行系统的分析和识别，并能够判断不同情景对汇率波动的影响大小。充分识别汇率风险后，学生应根据国际货币市场波动，利用正态VaR,历史模拟法，蒙特卡洛风险计量模型，对汇率波动造成的影响进行估计和测算。",
-        },
-        {
-          url: require("../assets/images/汇率管理工具图片.jpg"),
-          title: "汇率风险管理工具",
-          contain:
-            "汇率风险是跨国投资中最常见的风险，可以采取的应对手段主要包括：远期外汇合约（Forward contracts）、货币市场套期保值（Money market hedging）、外汇期货交易（Currency futures）、外汇期权交易（Currency options）。利用货币市场和期权期货交易市场，能够实现套期保值，降低跨国投资中的汇率风险。",
-        },
-        {
-          url: require("../assets/images/外汇期货交易图片.jpg"),
-          title: "外汇期货对冲交易",
-          contain:
-            "外汇期货交易的基本原理是，外汇买卖成交后，买卖双方均未提供现货，而仅提供若干的保证金，并订立契约，约定在未来某月依据约定的汇率办理实际收付的外汇业务。外汇期权交易的基本原理是通过购买期权增强交易的灵活性,即可以有权选择有利于自己的汇率进行外汇买卖,消除汇率变动带来的损失。",
-        },
       ],
       activeIndex: "1",
       carouselIds: [],
@@ -300,34 +264,14 @@ export default {
       treelist: [],
       small: [],
       news: [
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学1",
-          contain: "这是新闻",
-          time: "2020-07-20",
-        },
+        // {
+        //   url: require("../assets/images/5.jpg"),
+        //   title: "四川大学1",
+        //   contain: "这是新闻",
+        //   time: "2020-07-20",
+        // },
       ],
       newsitem: [
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学2",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学3",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学4",
-          time: "2020-07-30",
-        },
-        {
-          url: require("../assets/images/5.jpg"),
-          title: "四川大学5",
-          time: "2020-07-30",
-        },
       ],
       color: "left",
       flag: false,
@@ -421,7 +365,7 @@ export default {
                 console.log(this.$store.state.columnmessage.styleType, "con2");
                 window.open(href, "_self");
               }
-              // console.log(this.$store.state.columnmessage.id, 1);
+
             }
           });
         });
@@ -456,10 +400,10 @@ export default {
                         this.$store.state.columnmessage.styleType
                       );
                       //  localStorage.removeItem('styleType')
-                      console.log(
-                        this.$store.state.columnmessage.styleType,
-                        "con"
-                      );
+                      // console.log(
+                      //   this.$store.state.columnmessage.styleType,
+                      //   "con"
+                      // );
                       window.open(href, "_blank");
                     });
                   } else {
@@ -476,7 +420,7 @@ export default {
                 }
               }
               if (this.flag == false) {
-                console.log(res, "o");
+      
                 const { href } = this.$router.resolve({
                   path:
                     "/ChuanDa/" +
@@ -503,7 +447,7 @@ export default {
                   );
                   window.open(href, "_self");
                 }
-                console.log(this.$store.state.columnmessage.id, 1);
+               
               }
             });
           }
@@ -511,7 +455,7 @@ export default {
       }
     },
     linkto(val) {
-      console.log(val, 66);
+     
       if (val.linkType == 0) {
         allColumn().then((data) => {
           var columnid = val.linkColumnId;
@@ -672,7 +616,7 @@ export default {
         returnColumn(this.homeFormfirst.columnIds[0]).then((res) => {
           this.$store.state.columnmessage.styleType = res[0].styleType;
           this.$store.state.columnmessage.openMethod = res[0].openMethod;
-          console.log(res, 9);
+
         });
         this.color = "left";
       }
@@ -686,7 +630,7 @@ export default {
         returnColumn(this.homeFormfirst.columnIds[0]).then((res) => {
           this.$store.state.columnmessage.styleType = res[0].styleType;
           this.$store.state.columnmessage.openMethod = res[0].openMethod;
-          console.log(res, 9);
+
         });
         this.color = "right";
       }
@@ -698,7 +642,6 @@ export default {
       this.homeFormfirst.columnIds = res[0].columnIds.split(",");
       getHomebanner(res[0].bgImgId).then((res) => {
         this.homeFormfirst.bannerurl = res[0].imgUrl;
-        console.log(res, 9);
       });
       getHomecarouse(res[0].carouselIds).then((res) => {
         this.homeFormfirst.tableData = res.filter((res) => {
@@ -723,7 +666,7 @@ export default {
         this.$store.state.columnmessage.styleType = res[0].styleType;
         this.$store.state.columnmessage.showType = res[0].showType;
         this.$store.state.columnmessage.openMethod = res[0].openMethod;
-        console.log(res, 9);
+
       });
 
       returnColumn(this.homeFormfirst.columnIds[1]).then((res) => {
@@ -735,20 +678,19 @@ export default {
           console.log(this.homeFormfirst.linkcolumnarticletop, 666);
           this.homeFormfirst.linkcolumnarticlebottom = res.list.splice(1, 4);
         }
-        console.log(res, 0);
+       
       });
     });
     getHomelink().then((res) => {
       console.log(res, 666);
       this.Datachild = res[0];
-      // console.log(this.Datachild, 8);
       this.Data = res[1];
     });
   },
 };
 </script>
 <style lang="less">
-.home {
+#ply {
   font-family: "Source Han Serif CN";
   .banner {
     width: 100%;
@@ -796,7 +738,13 @@ export default {
         width: 460px;
         margin-left: 30px;
         h3 {
+          font-size: 22px;
+        }
+        .carousetitle{
           font-size: 24px;
+          text-align: left;
+          margin-top: 26px;
+          
         }
         .description {
           text-align: left;
@@ -808,7 +756,7 @@ export default {
           word-wrap: break-word;
           -webkit-line-clamp: 11;
           -webkit-box-orient: vertical;
-          margin-top: 16px;
+          margin-top: 10px;
           color: #333;
           font-size: 16px;
           line-height: 30px;
@@ -1003,8 +951,12 @@ export default {
         height: 310px;
         background: rgb(241, 238, 238);
         position: relative;
-        h3{
+        // h3{
+        //   font-size: 22px;
+        // }
+        .titletop{
           font-size: 22px;
+          
         }
         .textcontent {
           display: -webkit-box;
@@ -1046,6 +998,8 @@ export default {
         p {
           margin-top: 14px;
           margin-left: 8px;
+        //  font-size: 24px;
+       
         }
         .time {
           color: #ccc;

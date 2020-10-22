@@ -296,7 +296,7 @@ export default {
         width: 100%;
     font-size: 18px;
     padding-bottom: 10px;
-    padding-top: 20px;
+    padding-top: 26px;
     border-bottom: 2px solid #ccc;
     color: #2d2d2d;
     font-size: 18px;
